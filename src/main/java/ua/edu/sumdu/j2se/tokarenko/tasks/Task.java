@@ -15,15 +15,13 @@ public class Task {
     }
 
     public Task(String title, int time) {
-        this.title = title;
-        this.time = time;
+        setTitle(title);
+        setTime(time);
     }
 
     public Task(String title, int start, int end, int interval) {
-        this.title = title;
-        this.start = start;
-        this.end = end;
-        this.interval = interval;
+        setTitle(title);
+        setTime(start, end, interval);
     }
 
     public String getTitle() {
@@ -83,9 +81,9 @@ public class Task {
         }
     }
 
-//    public void setEnd(int end) {
-//        this.end = end;
-//    }
+    public void setEnd(int end) {
+        this.end = end;
+    }
 
     public boolean isActive() {
         return this.isActive;
@@ -99,9 +97,9 @@ public class Task {
         return this.isRepeating;
     }
 
-//    public void setRepeating(boolean repeating) {
-//        isRepeating = repeating;
-//    }
+    public void setRepeating(boolean repeating) {
+        isRepeating = repeating;
+    }
 
     public int getRepeatInterval() {
         if (this.isRepeating) {
@@ -117,7 +115,7 @@ public class Task {
             if (time != 0 && current < time) {
                 return time;
             }
-            if (time != 0 && current < start) {
+            if (start != 0 && current < start) {
                 return start;
             }
             if (current >= start && start != 0) {
