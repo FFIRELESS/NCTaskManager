@@ -40,6 +40,9 @@ public class Task {
     }
 
     public void setTime(int time) {
+        if (time < 0) {
+            throw new IllegalArgumentException("Time parameter has negative value!");
+        }
         this.time = time;
 
         if (this.isRepeating) {
@@ -48,6 +51,12 @@ public class Task {
     }
 
     public void setTime(int start, int end, int interval) {
+        if (start < 0 || end < 0) {
+            throw new IllegalArgumentException("Time parameter has negative value");
+        }
+        if(start > end || start == end || interval <= 0) {
+            throw new IllegalArgumentException("Time interval is <0!");
+        }
         this.start = start;
         this.end = end;
         this.interval = interval;

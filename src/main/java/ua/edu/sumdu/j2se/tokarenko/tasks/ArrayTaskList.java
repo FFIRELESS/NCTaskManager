@@ -14,6 +14,11 @@ public class ArrayTaskList {
     }
 
     public void add(Task task) {
+        if (task == null) {
+            throw new NullPointerException(
+                    "Task object parameter has null value!"
+            );
+        }
         if (tasks.length == taskAmount) {
             Task[] tempArr = new Task[taskAmount + INTERVAL];
 
@@ -24,6 +29,12 @@ public class ArrayTaskList {
     }
 
     public boolean remove(Task task) {
+        if (task == null) {
+            throw new NullPointerException(
+                    "Task object parameter has null value!"
+            );
+        }
+
         boolean status = false;
         int index_to_del;
 
@@ -54,6 +65,11 @@ public class ArrayTaskList {
     }
 
     public Task getTask(int index) {
+        if (index < 0 || index >= taskAmount) {
+            throw new IndexOutOfBoundsException(
+                    "Invalid ArrayTaskList index!"
+            );
+        }
         return tasks[index];
     }
 
