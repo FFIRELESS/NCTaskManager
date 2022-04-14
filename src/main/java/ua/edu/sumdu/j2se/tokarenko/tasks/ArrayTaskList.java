@@ -5,6 +5,10 @@ public class ArrayTaskList extends AbstractTaskList {
     public int taskAmount;
     private final int INTERVAL = 5;
 
+    static {
+        type = ListTypes.types.ARRAY;
+    }
+
     public ArrayTaskList() {
         tasks = new Task[INTERVAL];
     }
@@ -65,19 +69,5 @@ public class ArrayTaskList extends AbstractTaskList {
             throw new IndexOutOfBoundsException("Invalid task index!");
         }
         return tasks[index];
-    }
-
-    public ArrayTaskList incoming(int from, int to) {
-        int nextTaskTime;
-        ArrayTaskList array = new ArrayTaskList();
-
-        for (int i = 0; i < taskAmount; i++) {
-            nextTaskTime = tasks[i].nextTimeAfter(from);
-
-            if (nextTaskTime != -1 && nextTaskTime < to) {
-                array.add(tasks[i]);
-            }
-        }
-        return array;
     }
 }

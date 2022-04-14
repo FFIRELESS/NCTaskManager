@@ -6,6 +6,10 @@ public class LinkedTaskList extends AbstractTaskList {
         private LinkedListPointer next;
     }
 
+    static {
+        type = ListTypes.types.LINKED;
+    }
+
     public int taskAmount;
     private LinkedListPointer first;
 
@@ -63,29 +67,5 @@ public class LinkedTaskList extends AbstractTaskList {
             searchPointer = searchPointer.next;
         }
         return searchPointer.storedTask;
-    }
-
-    public LinkedTaskList incoming(int from, int to) {
-        if (from < 0 || to < 0) {
-            throw new IllegalArgumentException("Parameters are negative!");
-        }
-
-        if (from >= to) {
-            throw new IllegalArgumentException("Parameter value error!");
-        }
-
-        int nextTime;
-        LinkedListPointer searchPointer = first;
-        LinkedTaskList newList = new LinkedTaskList();
-
-        while (searchPointer.next == null) {
-            searchPointer = searchPointer.next;
-            nextTime = searchPointer.storedTask.nextTimeAfter(from);
-
-            if (nextTime != -1 && nextTime < to) {
-                newList.add(searchPointer.storedTask);
-            }
-        }
-        return newList;
     }
 }
