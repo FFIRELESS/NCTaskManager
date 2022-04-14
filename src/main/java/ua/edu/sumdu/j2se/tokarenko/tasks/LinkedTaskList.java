@@ -1,6 +1,6 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
-public class LinkedTaskList {
+public class LinkedTaskList extends AbstractTaskList {
     static class LinkedListPointer {
         private Task storedTask;
         private LinkedListPointer next;
