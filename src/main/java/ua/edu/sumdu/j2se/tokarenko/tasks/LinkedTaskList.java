@@ -1,5 +1,8 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class LinkedTaskList extends AbstractTaskList {
     static class LinkedListPointer {
         private Task storedTask;
@@ -67,5 +70,57 @@ public class LinkedTaskList extends AbstractTaskList {
             searchPointer = searchPointer.next;
         }
         return searchPointer.storedTask;
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return new Iterator<Task>() {
+            private LinkedListPointer pointer = first.next;
+            private LinkedListPointer delPointer = first;
+
+            @Override
+            public boolean hasNext() {
+                return pointer != null;
+            }
+
+            @Override
+            public Task next() {
+                if (pointer == null) {
+                    throw new NoSuchElementException(
+                            "An iterator reached the end of the list"
+                    );
+                }
+
+                if (delPointer.next.next == pointer) {
+                    delPointer = delPointer.next;
+                }
+                pointer = pointer.next;
+
+                return delPointer.next.storedTask;
+            }
+
+            @Override
+            public void remove() {
+                if (pointer == first.next) {
+                    throw new IllegalStateException(
+                            "Iterator method next() wasn't called"
+                    );
+                }
+                delPointer.next = pointer;
+                size--;
+            }
+        };
+    }
+
+    @Override
+    public LinkedTaskList clone() {
+        LinkedTaskList finalObject = new LinkedTaskList();
+        LinkedListPointer newPointer = first.next;
+
+        while (newPointer != null) {
+            finalObject.add(newPointer.storedTask);
+            newPointer = newPointer.next;
+        }
+        return finalObject;
     }
 }
