@@ -1,9 +1,13 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
-public class ArrayTaskList {
+public class ArrayTaskList extends AbstractTaskList {
     private Task[] tasks;
     public int taskAmount;
     private final int INTERVAL = 5;
+
+    static {
+        type = ListTypes.types.ARRAY;
+    }
 
     public ArrayTaskList() {
         tasks = new Task[INTERVAL];
@@ -15,9 +19,7 @@ public class ArrayTaskList {
 
     public void add(Task task) {
         if (task == null) {
-            throw new NullPointerException(
-                    "Task object parameter has null value!"
-            );
+            throw new NullPointerException("Task object parameter has null value!");
         }
         if (tasks.length == taskAmount) {
             Task[] tempArr = new Task[taskAmount + INTERVAL];
@@ -30,9 +32,7 @@ public class ArrayTaskList {
 
     public boolean remove(Task task) {
         if (task == null) {
-            throw new NullPointerException(
-                    "Task object parameter has null value!"
-            );
+            throw new NullPointerException("Task object parameter has null value!");
         }
 
         boolean status = false;
@@ -66,24 +66,8 @@ public class ArrayTaskList {
 
     public Task getTask(int index) {
         if (index < 0 || index >= taskAmount) {
-            throw new IndexOutOfBoundsException(
-                    "Invalid ArrayTaskList index!"
-            );
+            throw new IndexOutOfBoundsException("Invalid task index!");
         }
         return tasks[index];
-    }
-
-    public ArrayTaskList incoming(int from, int to) {
-        int nextTaskTime;
-        ArrayTaskList array = new ArrayTaskList();
-
-        for (int i = 0; i < taskAmount; i++) {
-            nextTaskTime = tasks[i].nextTimeAfter(from);
-
-            if (nextTaskTime != -1 && nextTaskTime < to) {
-                array.add(tasks[i]);
-            }
-        }
-        return array;
     }
 }
