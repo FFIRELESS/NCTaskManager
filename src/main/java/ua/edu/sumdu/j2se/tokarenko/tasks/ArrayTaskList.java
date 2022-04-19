@@ -1,5 +1,8 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class ArrayTaskList extends AbstractTaskList {
     private Task[] tasks;
     public int taskAmount;
@@ -69,5 +72,59 @@ public class ArrayTaskList extends AbstractTaskList {
             throw new IndexOutOfBoundsException("Invalid task index!");
         }
         return tasks[index];
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return new Iterator<Task>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < taskAmount;
+            }
+
+            @Override
+            public Task next() {
+                if (index == taskAmount) {
+                    throw new NoSuchElementException(
+                            "An iterator reached the end of the list"
+                    );
+                }
+                return tasks[index++];
+            }
+
+            @Override
+            public void remove() {
+                if (index == 0) {
+                    throw new IllegalStateException(
+                            "Iterator method next() wasn't called"
+                    );
+                }
+
+                index--;
+                tasks[index] = null;
+                taskAmount--;
+
+                if (index != taskAmount) {
+                    System.arraycopy(tasks, index + 1, tasks, index, taskAmount - index);
+                }
+
+                if (tasks.length - INTERVAL == taskAmount && taskAmount != 0) {
+                    Task[] tempList = new Task[taskAmount];
+                    System.arraycopy(tasks, 0, tempList, 0, taskAmount);
+                    tasks = tempList;
+                }
+            }
+        };
+    }
+
+    @Override
+    public ArrayTaskList clone() {
+        ArrayTaskList finalObject = new ArrayTaskList();
+        for (int cnt = 0; cnt < taskAmount; cnt++) {
+            finalObject.add(tasks[cnt]);
+        }
+        return finalObject;
     }
 }

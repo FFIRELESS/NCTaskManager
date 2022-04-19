@@ -1,6 +1,8 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
-public class Task {
+import java.util.Objects;
+
+public class Task implements Cloneable {
     private String title;
 
     private int time;
@@ -54,7 +56,7 @@ public class Task {
         if (start < 0 || end < 0) {
             throw new IllegalArgumentException("Time parameter has negative value");
         }
-        if(start > end || start == end || interval <= 0) {
+        if (start > end || start == end || interval <= 0) {
             throw new IllegalArgumentException("Time interval is <0!");
         }
         this.start = start;
@@ -141,5 +143,46 @@ public class Task {
             }
         }
         return -1;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (object == null || object.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Task task = (Task) object;
+        return isActive() == task.isActive()
+                && start == task.start
+                && end == task.end
+                && interval == task.interval
+                && isRepeating == task.isRepeating
+                && getTitle().equals(task.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), isActive(), start ^ end, ~interval, isRepeating);
+    }
+
+    @Override
+    public String toString() {
+        return "Task {" +
+                "title='" + title + "'" +
+                ", isActive=" + isActive +
+                ", start=" + start +
+                ", end=" + end +
+                ", interval=" + interval +
+                ", isRepeating=" + isRepeating +
+                "}";
+    }
+
+    @Override
+    public Task clone() throws CloneNotSupportedException {
+        return (Task) super.clone();
     }
 }
