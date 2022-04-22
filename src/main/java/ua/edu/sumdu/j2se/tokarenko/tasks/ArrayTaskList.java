@@ -1,7 +1,9 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList {
     private Task[] tasks;
@@ -126,5 +128,10 @@ public class ArrayTaskList extends AbstractTaskList {
             finalObject.add(tasks[cnt]);
         }
         return finalObject;
+    }
+
+    @Override
+    public Stream<Task> getStream() {
+        return Arrays.stream(tasks, 0, taskAmount);
     }
 }

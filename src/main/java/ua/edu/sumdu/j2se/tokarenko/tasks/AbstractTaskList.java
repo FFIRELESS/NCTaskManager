@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.tokarenko.tasks;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public abstract class AbstractTaskList implements Iterable<Task> {
     protected int size;
@@ -15,6 +16,8 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
     public abstract Task getTask(int index);
 
+    public abstract Stream<Task> getStream();
+
     public AbstractTaskList incoming(int from, int to) {
         if (from < 0 || to < 0) {
             throw new IllegalArgumentException("One parameter are negative!");
@@ -24,16 +27,14 @@ public abstract class AbstractTaskList implements Iterable<Task> {
             throw new IllegalArgumentException("\"From\" parameter >= \"to\" parameter!");
         }
 
-        int nextTime;
         AbstractTaskList finalArr = TaskListFactory.createTaskList(type);
+        Stream<Task> taskStream = this.getStream();
 
-        for (int i = 0; i < size; i++) {
-            nextTime = this.getTask(i).nextTimeAfter(from);
+        taskStream.filter((task) -> {
+            int nextTime = task.nextTimeAfter(from);
+            return nextTime != -1 && nextTime < to;
+        }).forEach(finalArr::add);
 
-            if (nextTime != -1 && nextTime < to) {
-                finalArr.add(this.getTask(i));
-            }
-        }
         return finalArr;
     }
 
