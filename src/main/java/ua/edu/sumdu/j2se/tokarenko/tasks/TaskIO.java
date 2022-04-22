@@ -29,8 +29,7 @@ public class TaskIO {
         }
     }
 
-    public static void writeBinary(AbstractTaskList tasks, File file)
-            throws FileNotFoundException {
+    public static void writeBinary(AbstractTaskList tasks, File file) throws FileNotFoundException {
         try (ObjectOutputStream listStream = new ObjectOutputStream(new FileOutputStream(file))) {
             listStream.writeInt(tasks.size());
 
@@ -44,8 +43,7 @@ public class TaskIO {
         }
     }
 
-    public static void readBinary(AbstractTaskList tasks, File file)
-            throws FileNotFoundException {
+    public static void readBinary(AbstractTaskList tasks, File file) throws FileNotFoundException {
         try (ObjectInputStream listStream = new ObjectInputStream(new FileInputStream(file))) {
             int taskAmount = listStream.readInt();
 
@@ -100,8 +98,7 @@ public class TaskIO {
         }
     }
 
-    public static void readText(AbstractTaskList tasks, File file)
-            throws FileNotFoundException {
+    public static void readText(AbstractTaskList tasks, File file) throws FileNotFoundException {
         try (Reader readStream = new InputStreamReader(
                 new FileInputStream(file))) {
             read(tasks, readStream);
