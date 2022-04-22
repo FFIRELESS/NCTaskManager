@@ -1,22 +1,24 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import java.io.Serializable;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.stream.Stream;
 
-public abstract class AbstractTaskList implements Iterable<Task> {
+public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
     protected int size;
-    static protected ListTypes.types type;
+    protected static ListTypes.types type;
 
     public abstract void add(Task task);
 
     public abstract boolean remove(Task task);
 
-    public abstract int size();
-
     public abstract Task getTask(int index);
 
     public abstract Stream<Task> getStream();
+
+    public int size() {
+        return size;
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -41,7 +43,16 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(size);
+        int result = size;
+
+        for (Task task : this) {
+            result ^= task.hashCode();
+        }
+
+        if (type == ListTypes.types.ARRAY) {
+            result = ~result;
+        }
+        return result;
     }
 
     @Override
