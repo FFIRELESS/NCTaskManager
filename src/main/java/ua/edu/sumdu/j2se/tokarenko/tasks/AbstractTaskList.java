@@ -18,7 +18,7 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
     public abstract Stream<Task> getStream();
 
-    public AbstractTaskList incoming(int from, int to) {
+    final public AbstractTaskList incoming(int from, int to) {
         if (from < 0 || to < 0) {
             throw new IllegalArgumentException("One parameter are negative!");
         }
@@ -31,8 +31,10 @@ public abstract class AbstractTaskList implements Iterable<Task> {
         Stream<Task> taskStream = this.getStream();
 
         taskStream.filter((task) -> {
+            // возврат значений, подходящих под условие
             int nextTime = task.nextTimeAfter(from);
             return nextTime != -1 && nextTime < to;
+            // применение ф-ции add ко всем элементам в любом порядке
         }).forEach(finalArr::add);
 
         return finalArr;

@@ -129,11 +129,11 @@ public class LinkedTaskList extends AbstractTaskList {
     @Override
     public Stream<Task> getStream() {
         ArrayList<Task> stream = new ArrayList<>(taskAmount);
-        LinkedListPointer current = first.next;
+        LinkedListPointer thisTask = first.next;
 
-        while (current != null) {
-            stream.add(current.storedTask);
-            current = current.next;
+        while (thisTask != null) {
+            stream.add(thisTask.storedTask);
+            thisTask = thisTask.next;
         }
         return stream.stream();
     }
