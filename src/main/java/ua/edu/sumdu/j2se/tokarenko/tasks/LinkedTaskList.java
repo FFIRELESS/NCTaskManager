@@ -1,11 +1,15 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList {
+    private static final Logger logger = Logger.getLogger(LinkedTaskList.class);
+
     static class LinkedListPointer {
         private Task storedTask;
         private LinkedListPointer next;
@@ -36,6 +40,8 @@ public class LinkedTaskList extends AbstractTaskList {
         first = new LinkedListPointer();
         first.next = tempPointer;
         taskAmount++;
+
+        logger.debug("Added new task: " + task);
     }
 
     public boolean remove(Task task) {
@@ -53,6 +59,9 @@ public class LinkedTaskList extends AbstractTaskList {
             if (searchPointer.next.storedTask.equals(task)) {
                 searchPointer.next = searchPointer.next.next;
                 taskAmount--;
+
+                logger.debug("Task removed: " + task);
+
                 return true;
             }
             searchPointer = searchPointer.next;

@@ -1,11 +1,15 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList {
+    private static final Logger logger = Logger.getLogger(ArrayTaskList.class);
+
     private Task[] tasks;
 
     private final int INTERVAL = 5;
@@ -33,6 +37,8 @@ public class ArrayTaskList extends AbstractTaskList {
             tasks = tempArr;
         }
         tasks[taskAmount++] = task;
+
+        logger.debug("Added new task: " + task);
     }
 
     public boolean remove(Task task) {
@@ -51,6 +57,8 @@ public class ArrayTaskList extends AbstractTaskList {
         }
 
         if (!status) {
+            logger.warn("Removing task not found");
+
             return false;
         }
 
@@ -65,7 +73,11 @@ public class ArrayTaskList extends AbstractTaskList {
             Task[] tempArray = new Task[taskAmount];
             System.arraycopy(tasks, 0, tempArray, 0, taskAmount);
             tasks = tempArray;
+
+            logger.debug("List resized to size " + tasks.length);
         }
+        logger.debug("Task removed: " + task);
+
         return true;
     }
 

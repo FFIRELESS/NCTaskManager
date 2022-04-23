@@ -1,10 +1,14 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import org.apache.log4j.Logger;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task implements Cloneable, Serializable {
+    private static final Logger logger = Logger.getLogger(Task.class);
+
     private String title;
 
     private int interval;
@@ -32,6 +36,8 @@ public class Task implements Cloneable, Serializable {
     }
 
     public void setTitle(String title) {
+        logger.debug("Saved new title of task: " + this);
+
         this.title = title;
     }
 
@@ -48,6 +54,8 @@ public class Task implements Cloneable, Serializable {
         if (this.isRepeating) {
             this.isRepeating = false;
         }
+
+        logger.debug("Saved new start time of task: " + this);
     }
 
     public void setTime(LocalDateTime start, LocalDateTime end, int interval) {
@@ -70,6 +78,8 @@ public class Task implements Cloneable, Serializable {
         if (!this.isRepeating) {
             this.isRepeating = true;
         }
+
+        logger.debug("Saved new start time, end time and interval of task: " + this);
     }
 
     public LocalDateTime getStartTime() {
@@ -89,6 +99,8 @@ public class Task implements Cloneable, Serializable {
     }
 
     public void setActive(boolean active) {
+        logger.debug("Saved new activity of task: " + this);
+
         this.isActive = active;
     }
 

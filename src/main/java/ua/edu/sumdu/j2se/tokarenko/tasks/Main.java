@@ -1,12 +1,11 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.time.LocalDateTime;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 //		File file = new File("test1.json");
 //
 //		Task task = new Task("ddd",
@@ -36,5 +35,5 @@ public class Main {
 //		}
 //
 //		System.out.println(readList.size());
-	}
+    }
 }
