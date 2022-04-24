@@ -1,6 +1,7 @@
-package ua.edu.sumdu.j2se.tokarenko.tasks;
+package ua.edu.sumdu.j2se.tokarenko.tasks.model;
 
 import org.apache.log4j.Logger;
+import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ListTypes;
 
 import java.util.Arrays;
 import java.util.Iterator;

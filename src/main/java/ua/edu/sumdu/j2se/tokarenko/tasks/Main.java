@@ -1,11 +1,16 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks;
 
+import ua.edu.sumdu.j2se.tokarenko.tasks.controller.MainController;
+
 import java.io.File;
 import java.time.LocalDateTime;
 
 public class Main {
 
     public static void main(String[] args) {
+        MainController mainController = new MainController();
+
+        mainController.process();
 //		File file = new File("test1.json");
 //
 //		Task task = new Task("ddd",

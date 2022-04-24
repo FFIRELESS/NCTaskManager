@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tokarenko.tasks;
+package ua.edu.sumdu.j2se.tokarenko.tasks.model;
 
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;

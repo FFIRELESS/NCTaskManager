@@ -1,4 +1,6 @@
-package ua.edu.sumdu.j2se.tokarenko.tasks;
+package ua.edu.sumdu.j2se.tokarenko.tasks.model;
+
+import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ListTypes;
 
 import java.io.Serializable;
 import java.util.Iterator;

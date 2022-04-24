@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tokarenko.tasks;
+package ua.edu.sumdu.j2se.tokarenko.tasks.model;
 
 import java.time.LocalDateTime;
 import java.util.*;
