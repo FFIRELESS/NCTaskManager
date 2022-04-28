@@ -109,7 +109,7 @@ public class LinkedTaskList extends AbstractTaskList {
                     );
                 }
                 delPointer.next = pointer;
-                size--;
+                taskAmount--;
             }
         };
     }

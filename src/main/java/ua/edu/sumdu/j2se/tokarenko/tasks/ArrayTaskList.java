@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList {
     private Task[] tasks;
-    public int taskAmount;
+
     private final int INTERVAL = 5;
 
     static {
@@ -24,7 +24,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
     public void add(Task task) {
         if (task == null) {
-            throw new NullPointerException("Task object parameter has null value!");
+            throw new NullPointerException("Task object parameter is null");
         }
         if (tasks.length == taskAmount) {
             Task[] tempArr = new Task[taskAmount + INTERVAL];
