@@ -10,18 +10,54 @@ public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
     protected int taskAmount;
     protected static ListTypes.types type;
 
+    /**
+     * Метод для додавання задачі в колекцію.
+     *
+     * @param task - задача, що додається в колекцію.
+     * @throws NullPointerException якщо задача не задана.
+     */
     public abstract void add(Task task);
 
+    /**
+     * Метод для видалення задачі з колекції.
+     *
+     * @param task - задача, що видаляється з колекції.
+     * @return true якщо задачу було видалено, false - задачу не знайдено в колекції.
+     * @throws NullPointerException якщо задача не задана.
+     */
     public abstract boolean remove(Task task);
 
+    /**
+     * Метод для пошуку задачі по індексу.
+     *
+     * @param index - індекс шуканої задачі.
+     * @return шукану задачу.
+     * @throws IndexOutOfBoundsException якщо індекс за межами розміру колекції.
+     */
     public abstract Task getTask(int index);
 
+    /**
+     * Метод, що повертає потік колекції.
+     *
+     * @return потік колекції.
+     */
     public abstract Stream<Task> getStream();
 
+    /**
+     * Метод, що повертає розмір колекції.
+     *
+     * @return розмір колекції.
+     */
     public int size() {
         return taskAmount;
     }
 
+    /**
+     * Метод, що порівнює об'єкти колекції.
+     *
+     * @param object задача, яка буде порівнюватись.
+     * @return true якщо задачі однакові, інакше - false.
+     */
     @Override
     public boolean equals(Object object) {
         AbstractTaskList tasks = (AbstractTaskList) object;
@@ -43,6 +79,11 @@ public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
         return true;
     }
 
+    /**
+     * Метод хеш-кодування об'єктів колекції.
+     *
+     * @return хеш-код об'єкту даної колекції.
+     */
     @Override
     public int hashCode() {
         int hash = taskAmount;
@@ -57,6 +98,11 @@ public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
         return hash;
     }
 
+    /**
+     * Метод приведення об'єкту колекції до текстового формату.
+     *
+     * @return рядок, що вміщує значення всіх полів об'єкту колекції.
+     */
     @Override
     public String toString() {
         Iterator<Task> strIterator = this.iterator();

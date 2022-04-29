@@ -1,12 +1,7 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.utils;
 
-import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
-
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
-import java.util.concurrent.TimeUnit;
 
 import static ua.edu.sumdu.j2se.tokarenko.tasks.utils.Exceptions.nullArgumentException;
 
