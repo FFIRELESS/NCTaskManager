@@ -1,15 +1,39 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
+import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
+import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
+import ua.edu.sumdu.j2se.tokarenko.tasks.view.PrintTasksView;
 
 import static ua.edu.sumdu.j2se.tokarenko.tasks.utils.Exceptions.unknownModeException;
 
-public class CreateTaskController extends TaskActionsController {
+public class EditTaskController extends TaskActionsController {
     @Override
     public ProgramModes process(AbstractTaskList taskList, ProgramModes mode) {
         if (getBufferedTask() == null) {
-            createNewTask();
+            if (DataTest.isEmptyList(taskList)) {
+                PrintTasksView allTasksView = new PrintTasksView();
+
+                ConsoleView.newEmptyLine();
+                ConsoleView.printParagraph("Оберіть задачу для редагування з таблиці нижче");
+                allTasksView.printAllTasksWithIndex(taskList);
+
+                taskActionsView.setTaskNumber();
+
+                try {
+                    selectedTask(taskList, ConsoleInputController.nextIntInRange(0, taskList.size() - 1));
+                    return ProgramModes.EDIT;
+                } catch (CloneNotSupportedException e) {
+                    logger.error("Exception: " + e);
+                    return ProgramModes.MAIN_MENU;
+                }
+            } else {
+                logger.error("List is empty: " + taskList);
+
+                ConsoleView.printWarning("Задачі не знайдено");
+                return ProgramModes.MAIN_MENU;
+            }
         }
 
         switch (mode) {
@@ -29,7 +53,7 @@ public class CreateTaskController extends TaskActionsController {
                 taskActionsView.setTaskStartTime();
                 start = ConsoleInputController.nextTime();
                 taskActionsView.setTaskEndTime();
-                end = ConsoleInputController.nextEndDate(start);
+                end = ConsoleInputController.nextTime();
                 taskActionsView.setTaskNewInterval();
                 interval = ConsoleInputController.nextInt();
                 editTimeRepeating();
@@ -42,24 +66,22 @@ public class CreateTaskController extends TaskActionsController {
                 break;
 
             case SAVE:
-                if (!isTaskNull()) {
-                    savingController.process(taskList, this);
-                    taskActionsView.createTask();
-                } else {
-                    taskActionsView.creatingErrorTask();
-                    clearBuffer();
-                }
+                savingController.process(taskList, this);
                 return ProgramModes.MAIN_MENU;
 
-            case MAIN_MENU:
+            case REMOVE:
                 clearBuffer();
+                taskActionsView.removeTask();
                 return ProgramModes.MAIN_MENU;
+
+            case SKIP:
+                return ProgramModes.EDIT;
 
             default:
                 logger.fatal("Mode is incorrect: " + mode);
-                logger.error("Failed creating the task");
+                logger.error("Failed editing the task");
                 throw unknownModeException;
         }
-        return ProgramModes.ADD;
+        return ProgramModes.EDIT;
     }
 }

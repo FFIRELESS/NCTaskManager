@@ -33,6 +33,7 @@ public class LinkedTaskList extends AbstractTaskList {
 
     public void add(Task task) {
         if (task == null) {
+            logger.error("Task object is null");
             throw new NullPointerException("Task object parameter has null value!");
         }
 
@@ -42,11 +43,12 @@ public class LinkedTaskList extends AbstractTaskList {
         first.next = tempPointer;
         taskAmount++;
 
-        logger.debug("Added new task: " + task);
+        logger.debug("Task added: " + task);
     }
 
     public boolean remove(Task task) {
         if (task == null) {
+            logger.error("Task object is null");
             throw new NullPointerException("Task object parameter has null value!");
         }
 
@@ -72,6 +74,7 @@ public class LinkedTaskList extends AbstractTaskList {
 
     public Task getTask(int index) {
         if (index < 0 || index >= taskAmount) {
+            logger.error("Index of task is out of bound");
             throw new IndexOutOfBoundsException("Invalid index parameter!");
         }
 
@@ -98,9 +101,7 @@ public class LinkedTaskList extends AbstractTaskList {
             @Override
             public Task next() {
                 if (pointer == null) {
-                    throw new NoSuchElementException(
-                            "An iterator reached the end of the list"
-                    );
+                    throw new NoSuchElementException("An iterator reached the end of the list");
                 }
 
                 if (delPointer.next.next == pointer) {
@@ -114,9 +115,7 @@ public class LinkedTaskList extends AbstractTaskList {
             @Override
             public void remove() {
                 if (pointer == first.next) {
-                    throw new IllegalStateException(
-                            "Iterator method next() wasn't called"
-                    );
+                    throw new IllegalStateException("Iterator method next() wasn't called");
                 }
                 delPointer.next = pointer;
                 taskAmount--;

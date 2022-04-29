@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
+import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,217 +10,214 @@ import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 public class ConsoleInputController extends BaseController {
-    private static final Logger logger =
-            Logger.getLogger(ConsoleInputController.class);
+    private static final Logger logger = Logger.getLogger(ConsoleInputController.class);
 
-    /**
-     * Methods responsible for the correct input of the string by the user
-     *
-     * @return entered value
-     */
+    private static boolean error = false;
+    private static boolean boolValue = false;
+    private static LocalDateTime timeValue = null;
+    private static String strValue;
+    private static int intValue = 0;
+
+    private static void checkInt() {
+        if (DataTest.isEmptyString(strValue)) {
+            logger.debug("String input error");
+            error = true;
+        }
+
+        try {
+            intValue = Integer.parseInt(strValue);
+        } catch (NumberFormatException e) {
+            logger.debug(e);
+            error = true;
+        }
+    }
+
+    private static void checkDate() {
+        if (DataTest.isEmptyString(strValue)) {
+            logger.debug("String input error");
+            error = true;
+        }
+
+        try {
+            timeValue = LocalDateTime.parse(strValue, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        } catch (DateTimeParseException e) {
+            logger.debug(e);
+            error = true;
+        }
+    }
+
     public static String nextString() {
-        boolean wasError;
-        String line;
-
         do {
-            wasError = false;
-            line = in.nextLine();
+            error = false;
+            strValue = in.nextLine();
 
-            if (DataTest.isEmptyString(line)) {
-                logger.debug(
-                        "User's input error"
-                );
-
-                wasError = true;
-
+            if (DataTest.isEmptyString(strValue)) {
+                logger.debug("String input error");
+                error = true;
             }
 
-            if (wasError) {
-                System.out.print("Entered value is not correct!\n Try again -");
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
             }
-
-        } while (wasError);
-
-        return line;
+        } while (error);
+        return strValue;
     }
 
-    /**
-     * Methods responsible for the correct input of the number by the user
-     *
-     * @return entered value
-     */
     public static int nextInt() {
-        boolean wasError;
-        int inValue = 0;
-        String tempInt;
-
         do {
-            wasError = false;
-            tempInt = in.nextLine();
+            error = false;
+            strValue = in.nextLine();
 
-            if (DataTest.isEmptyString(tempInt)) {
-                logger.debug(
-                        "User's input error. Input string is empty!"
-                );
+            checkInt();
 
-                wasError = true;
-
+            if (intValue <= 0) {
+                logger.debug("Integer input error");
+                error = true;
             }
 
-            try {
-                inValue = Integer.parseInt(tempInt);
-            } catch (NumberFormatException e) {
-                logger.debug(e);
-                wasError = true;
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
             }
-
-            if (inValue < 0) {
-                wasError = true;
-                logger.debug(
-                        "User's input error. Int value is negative!"
-                );
-            }
-
-            if (wasError) {
-                System.out.print("Entered value is not correct!\n Try again -");
-            }
-
-        } while (wasError);
-
-        return inValue;
+        } while (error);
+        return intValue;
     }
 
-    /**
-     * Methods responsible for the correct input of the number in range by the user
-     *
-     * @return entered value
-     */
     public static int nextIntInRange(int from, int to) {
-        boolean wasError;
-        int inValue = 0;
-        String tempInt;
-
         do {
-            wasError = false;
-            tempInt = in.nextLine();
+            error = false;
+            strValue = in.nextLine();
 
-            if (DataTest.isEmptyString(tempInt)) {
-                logger.debug(
-                        "User's input error. Input string is empty!"
-                );
+            checkInt();
 
-                wasError = true;
-
+            if (intValue < from || intValue > to) {
+                logger.debug("Integer input error");
+                error = true;
             }
 
-            try {
-                inValue = Integer.parseInt(tempInt);
-            } catch (NumberFormatException e) {
-                logger.debug(e);
-                wasError = true;
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
             }
-
-            if (inValue < from || inValue > to) {
-                wasError = true;
-                logger.debug(
-                        "User's input error. Int value is negative!"
-                );
-            }
-
-            if (wasError) {
-                System.out.print("Entered value is not correct!\n Try again -");
-            }
-
-        } while (wasError);
-
-        return inValue;
+        } while (error);
+        return intValue;
     }
 
-    /**
-     * Methods responsible for the correct input of the boolean by the user
-     *
-     * @return entered value
-     */
     public static boolean nextBoolean() {
-        boolean wasError;
-        boolean boolValue = false;
-        String tempbool;
-
         do {
-            wasError = false;
-            tempbool = in.nextLine();
+            error = false;
+            strValue = in.nextLine();
 
-            if (DataTest.isEmptyString(tempbool)) {
-                logger.debug(
-                        "User's input error. Input string is empty!"
-                );
-
-                wasError = true;
-                continue;
+            if (DataTest.isEmptyString(strValue)) {
+                logger.debug("String input error");
+                error = true;
             }
 
-            if (tempbool.toLowerCase(Locale.ROOT).equals("true")) {
-
+            if (strValue.toLowerCase(Locale.ROOT).equals("true") || strValue.equals("1")) {
                 boolValue = true;
-            } else if (tempbool.toLowerCase(Locale.ROOT).equals("false")) {
+            } else if (strValue.toLowerCase(Locale.ROOT).equals("false") || strValue.equals("0")) {
                 boolValue = false;
             } else {
-                wasError = true;
+                error = true;
             }
 
-            if (wasError) {
-                System.out.print("Entered value is not correct!\n Try again -");
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
             }
-
-        } while (wasError);
-
+        } while (error);
         return boolValue;
     }
 
-    /**
-     * Methods responsible for the correct input of the time by the user
-     *
-     * @return entered value
-     */
     public static LocalDateTime nextTime() {
-        LocalDateTime returnTime = null;
-        boolean wasError;
+        do {
+            error = false;
+            strValue = in.nextLine();
 
-        String tempDataTime;
+            checkDate();
+
+            if (timeValue != null && timeValue.isBefore(LocalDateTime.now())) {
+                logger.debug("Time input error");
+                error = true;
+            }
+
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
+            }
+        } while (error);
+        return timeValue;
+    }
+
+    public static LocalDateTime nextCalendarDate() {
+        do {
+            error = false;
+            strValue = in.nextLine();
+
+            checkDate();
+
+            if (timeValue == null) {
+                logger.debug("Time input error");
+                error = true;
+            }
+
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
+            }
+        } while (error);
+        return timeValue;
+    }
+
+    public static LocalDateTime nextEndDate(LocalDateTime start) {
+        do {
+            error = false;
+            strValue = in.nextLine();
+
+            checkDate();
+
+            if (timeValue == null) {
+                logger.debug("Time input error");
+                error = true;
+            }
+
+            if (timeValue.equals(start) || timeValue.isBefore(start)) {
+                logger.debug("End date <= start date");
+                error = true;
+            }
+
+            if (error) {
+                System.out.print("Кінцевий час <= стартовому! Спробуйте ще раз: ");
+            }
+        } while (error);
+        return timeValue;
+    }
+
+    // перевірка на українця
+    public static boolean nextUkrainian() {
+        int attempts = 3;
 
         do {
-            wasError = false;
-            tempDataTime = in.nextLine();
+            error = false;
 
-            if (DataTest.isEmptyString(tempDataTime)) {
-                logger.debug(
-                        "User's input error. Input string is empty!"
-                );
+            ConsoleView.newEmptyLine();
+            ConsoleView.printParagraph("Відповідь: ");
+            strValue = in.nextLine();
 
-                wasError = true;
-
+            if (!strValue.toLowerCase(Locale.ROOT).contains("героям слава")) {
+                error = true;
+                attempts--;
+            } else {
+                ConsoleView.newEmptyLine();
+                ConsoleView.printChooser("Ласкаво просимо, козаче!");
+                error = false;
             }
 
-            try {
-                returnTime = LocalDateTime.parse(tempDataTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            } catch (DateTimeParseException e) {
-                logger.debug(e);
-                wasError = true;
+            if (error && attempts <= 0) {
+                ConsoleView.newEmptyLine();
+                ConsoleView.printWarning("ПІШОВ Н@ХYЙ, МОСКАЛЬ ПРОКЛЯТИЙ!!!");
+                return false;
             }
 
-            if (returnTime != null && returnTime.isBefore(LocalDateTime.now())) {
-                wasError = true;
-                logger.debug(
-                        "User's input error. LocalDateTime value is in the past!"
-                );
+            if (error) {
+                ConsoleView.printNote("В тебе ще " + attempts + " спроб");
             }
-
-            if (wasError) {
-                System.out.print("Entered value is not correct!\n Try again -");
-            }
-
-        } while (wasError);
-
-        return returnTime;
+        } while (error);
+        return true;
     }
 }

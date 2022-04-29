@@ -12,20 +12,23 @@ public class DataTest {
         char ch;
 
         if (string.length() == 0) {
+            logger.debug("String is empty");
             return true;
         }
 
         for (int i = 0; i < string.length(); ++i) {
             ch = string.charAt(i);
             if (ch != '\t' && ch != ' ') {
+                logger.debug("String is not empty");
                 return false;
             }
         }
+        logger.debug("String is empty");
         return true;
     }
 
     public static boolean isEmptyList(AbstractTaskList list) {
-        logger.debug("Checking for an empty collection: " + list.getClass());
+        logger.debug("Checking for an empty list: " + list.getClass());
         return list.size() != 0;
     }
 }

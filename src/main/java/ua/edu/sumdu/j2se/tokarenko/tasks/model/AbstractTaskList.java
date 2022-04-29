@@ -45,16 +45,16 @@ public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
 
     @Override
     public int hashCode() {
-        int result = taskAmount;
+        int hash = taskAmount;
 
         for (Task task : this) {
-            result ^= task.hashCode();
+            hash ^= task.hashCode();
         }
 
         if (type == ListTypes.types.ARRAY) {
-            result = ~result;
+            hash = ~hash;
         }
-        return result;
+        return hash;
     }
 
     @Override

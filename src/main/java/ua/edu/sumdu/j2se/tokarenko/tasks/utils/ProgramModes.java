@@ -9,8 +9,10 @@ public enum ProgramModes {
     SET_REPEATING_TIME,
     SET_NON_REPEATING_TIME,
     ADD,
-    CHANGE,
+    EDIT,
+    REMOVE,
     EXIT,
     SAVE,
+    SKIP,
 }
 

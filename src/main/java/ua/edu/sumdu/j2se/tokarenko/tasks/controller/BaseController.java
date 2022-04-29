@@ -22,7 +22,7 @@ public abstract class BaseController {
         throw programModeException;
     }
 
-    ProgramModes process(AbstractTaskList tasks, ProgramModes mode, AlertsController controller) {
+    ProgramModes process(AbstractTaskList tasks, ProgramModes mode) {
         throw programModeException;
     }
 

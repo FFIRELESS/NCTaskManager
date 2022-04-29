@@ -8,31 +8,21 @@ import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
 import java.time.LocalDateTime;
 
 public class TodayTasksController extends PrintCalendarController {
-
-    /**
-     * Method that controls the creation and display the to-do list for today
-     * @param taskList collection with tasks
-     * @return constant indicating which next action to perform in the program
-     */
     @Override
     public ProgramModes process(AbstractTaskList taskList) {
-        setStart(LocalDateTime.now());
-        setEnd(LocalDateTime.now().plusHours(24 - LocalDateTime.now().getHour()));
+        setStartPeriod(LocalDateTime.now());
+        setEndPeriod(LocalDateTime.now().plusHours(24 - LocalDateTime.now().getHour()));
 
-        taskMap = Tasks.calendar(taskList, start, end);
+        calendarTasks = Tasks.calendar(taskList, start, end);
 
-        ConsoleView.lineSeparator();
-        ConsoleView.lineSeparator();
-
-        if (taskMap.isEmpty()) {
-            ConsoleView.printTitle("They are no tasks for today");
-            logger.debug("Collection is empty " + taskMap);
-
+        if (calendarTasks.isEmpty()) {
+            ConsoleView.newEmptyLine();
+            ConsoleView.printParagraph("На сьогодні Ви не маєте жодної задачі! Відпочивайте :)");
+            logger.debug("Today tasks list is empty");
         } else {
-            ConsoleView.printTitle("Your tasks for today:");
-            showCalendarView.printCalendarTasks(taskMap);
-            logger.debug("Display the to-do list for today");
-
+            ConsoleView.newEmptyLine();
+            ConsoleView.printParagraph("Задачі на сьогодні: ");
+            printCalendarView.printCalendarTasks(calendarTasks);
         }
         return ProgramModes.MAIN_MENU;
     }

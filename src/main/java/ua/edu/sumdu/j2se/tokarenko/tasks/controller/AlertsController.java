@@ -1,31 +1,38 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
-import ua.edu.sumdu.j2se.tokarenko.tasks.model.Alerts;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.Task;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.Tasks;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
+import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
+import ua.edu.sumdu.j2se.tokarenko.tasks.view.PrintCalendarView;
 
-import static ua.edu.sumdu.j2se.tokarenko.tasks.utils.Exceptions.emptyTaskListException;
+import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.SortedMap;
 
 public class AlertsController extends BaseController {
-    /**
-     * Notified thread
-     */
-    public Alerts notified;
+    protected static final Logger logger = Logger.getLogger(AlertsController.class);
 
-    /**
-     * Method that controls the process of creating and launching a notified thread
-     * @param taskList collection with tasks
-     * @return constant indicating which next action to perform in the program4
-     */
+    private final PrintCalendarView view = new PrintCalendarView();
+
     @Override
     public ProgramModes process(AbstractTaskList taskList) {
         if (DataTest.isEmptyList(taskList)) {
-            notified = new Alerts("Tasks for the near future:", taskList);
-        } else {
-            throw emptyTaskListException;
-        }
+            SortedMap<LocalDateTime, Set<Task>> taskMap = Tasks.calendar(taskList,
+                    LocalDateTime.now(), LocalDateTime.now().plusMinutes(30));
 
+            if (!taskMap.isEmpty()) {
+                ConsoleView.newEmptyLine();
+                ConsoleView.printWarning("Термінові задачі:");
+                view.printCalendarTasks(taskMap);
+
+                logger.debug("Found urgent tasks");
+            }
+        }
+        logger.debug("No urgent tasks found");
         return ProgramModes.MAIN_MENU;
     }
 }

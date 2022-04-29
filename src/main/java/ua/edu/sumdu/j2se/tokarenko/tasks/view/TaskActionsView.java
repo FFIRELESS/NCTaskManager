@@ -2,45 +2,59 @@ package ua.edu.sumdu.j2se.tokarenko.tasks.view;
 
 public class TaskActionsView extends PrintTasksView {
 
-    public void printRequestNewTitle() {
-        lineSeparator();
-        printTitle("Enter a new task title");
-        System.out.print("-->");
-
+    public void setTaskTitle() {
+        newEmptyLine();
+        printChooser("Введіть назву: ");
     }
 
-    public void printRequestNewActivity() {
-        lineSeparator();
-        printTitle("Enter a new task activity");
-        System.out.print("-->");
-
+    public void setTaskIsActive() {
+        newEmptyLine();
+        printChooser("Активувати задачу? \"true\"(\"1\") - так, \"false\"(\"0\") - ні: ");
     }
 
-    public void printRequestNewStartTime() {
-        lineSeparator();
-        printTitle("Enter a new task start time");
-        System.out.print("-->");
-
+    public void setTaskStartTime() {
+        newEmptyLine();
+        printChooser("Введіть час початку в форматі (латинською) \"2022-01-01T13:32:00\": ");
     }
 
-    public void printRequestNewEndTime() {
-        lineSeparator();
-        printTitle("Enter a new task end time");
-        System.out.print("-->");
-
+    public void setTaskEndTime() {
+        newEmptyLine();
+        printChooser("Введіть час закінчення в форматі (латинською) \"2022-01-01T13:32:00\": ");
     }
 
-    public void printRequestNewInterval() {
-        lineSeparator();
-        printTitle("Enter a new task interval");
-        System.out.print("-->");
-
+    public void setTaskNewInterval() {
+        newEmptyLine();
+        printChooser("Введіть інтервал повторення в секундах: ");
     }
 
-    public void printTaskSelection() {
-        lineSeparator();
-        printTitle("Enter the number of the task you want to edit");
-        System.out.print("-->");
+    public void setTaskNumber() {
+        newEmptyLine();
+        printChooser("Введіть номер задачі: ");
+    }
 
+    public void setPeriodStartTime() {
+        newEmptyLine();
+        printChooser("Введіть час початку в форматі (латинською) \"2022-01-01T13:32:00\": ");
+    }
+
+    public void setPeriodEndTime() {
+        newEmptyLine();
+        printChooser("Введіть час закінчення в форматі (латинською) \"2022-01-01T13:32:00\": ");
+    }
+
+    public void removeTask() {
+        newEmptyLine();
+        printWarning("Задачу видалено");
+        newEmptyLine();
+    }
+
+    public void createTask() {
+        newEmptyLine();
+        printParagraph("Задачу створено");
+    }
+
+    public void creatingErrorTask() {
+        newEmptyLine();
+        printWarning("Задачу не було створено");
     }
 }

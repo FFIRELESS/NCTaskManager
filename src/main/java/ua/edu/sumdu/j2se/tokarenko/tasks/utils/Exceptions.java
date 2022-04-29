@@ -7,4 +7,6 @@ public class Exceptions {
             new NullPointerException("TaskList is empty");
     public static final IllegalArgumentException nullArgumentException =
             new IllegalArgumentException("Function argument is null");
+    public static final IllegalStateException unknownModeException =
+            new IllegalStateException("Mode is incorrect");
 }

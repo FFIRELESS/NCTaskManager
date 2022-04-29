@@ -36,7 +36,7 @@ public class Task implements Cloneable, Serializable {
     }
 
     public void setTitle(String title) {
-        logger.debug("Saved new title of task: " + this);
+        logger.debug("Saved title of task: " + this);
 
         this.title = title;
     }
@@ -47,6 +47,7 @@ public class Task implements Cloneable, Serializable {
 
     public void setTime(LocalDateTime time) {
         if (time == null) {
+            logger.error("Task object is null");
             throw new IllegalArgumentException("Parameter has null value");
         }
         this.start = time;
@@ -54,16 +55,17 @@ public class Task implements Cloneable, Serializable {
         if (this.isRepeating) {
             this.isRepeating = false;
         }
-
-        logger.debug("Saved new start time of task: " + this);
+        logger.debug("Saved start time of task: " + this);
     }
 
     public void setTime(LocalDateTime start, LocalDateTime end, int interval) {
         if (start == null || end == null) {
+            logger.error("Task object is null");
             throw new IllegalArgumentException("Some parameter has null value!");
         }
 
         if (start.isAfter(end) || start.equals(end)) {
+            logger.error("Start time >= end time");
             throw new IllegalArgumentException("\"Start\" parameter >= \"end\" parameter");
         }
 
@@ -78,7 +80,6 @@ public class Task implements Cloneable, Serializable {
         if (!this.isRepeating) {
             this.isRepeating = true;
         }
-
         logger.debug("Saved new start time, end time and interval of task: " + this);
     }
 

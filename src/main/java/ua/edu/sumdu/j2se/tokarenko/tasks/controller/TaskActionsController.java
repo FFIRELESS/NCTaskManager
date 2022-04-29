@@ -8,111 +8,55 @@ import ua.edu.sumdu.j2se.tokarenko.tasks.view.TaskActionsView;
 import java.time.LocalDateTime;
 
 public class TaskActionsController extends BaseController {
-    protected static final Logger logger =
-            Logger.getLogger(TaskActionsController.class);
+    protected static final Logger logger = Logger.getLogger(TaskActionsController.class);
 
-    /**
-     * Buffer task
-     */
-    private Task tempTask;
+    private Task bufferedTask;
+    protected BaseController savingController = new SavingController();
+    protected TaskActionsView taskActionsView = new TaskActionsView();
 
-    /**
-     * Class that controls the preservation of the processed task to the collection
-     */
-    protected BaseController saveController = new SavingController();
-
-    /**
-     * Class responsible for displaying the required information in the console
-     */
-    protected TaskActionsView view = new TaskActionsView();
-
-    /**
-     * Buffer start time for task
-     */
     protected LocalDateTime start;
-
-    /**
-     * Buffer end time for task
-     */
     protected LocalDateTime end;
-
-    /**
-     * Buffer interval for task
-     */
     protected Integer interval;
-
-    /**
-     * Buffer title for task
-     */
     protected String title;
+    protected Boolean isActive;
 
-    /**
-     * Buffer activity for task
-     */
-    protected Boolean activity;
-
-    /**
-     * Methods responsible for creating an empty task
-     */
     public void createNewTask() {
-        tempTask = new Task();
+        bufferedTask = new Task();
     }
 
-    /**
-     * Method responsible for selecting a task to adjust from the collection
-     *
-     * @param taskList collection with tasks
-     * @param index    index of the required task
-     * @throws CloneNotSupportedException if the cloning failed
-     */
-    public void choiceTask(AbstractTaskList taskList, int index) throws CloneNotSupportedException {
-        tempTask = taskList.getTask(index).clone();
-        taskList.remove(taskList.getTask(index));
-        logger.debug("Task selected for editing " + tempTask.toString());
+    public void selectedTask(AbstractTaskList taskList, int idx) throws CloneNotSupportedException {
+        bufferedTask = taskList.getTask(idx).clone();
+        taskList.remove(taskList.getTask(idx));
+
+        logger.debug("Task selected: " + bufferedTask.toString());
     }
 
-    /**
-     * Method is responsible for setting a new name for the task
-     */
+    public boolean isTaskNull() {
+        return start == null || title == null;
+    }
+
     public void editTitle() {
-        tempTask.setTitle(title);
+        bufferedTask.setTitle(title);
     }
 
-    /**
-     * Method responsible for adjusting the activity of the task
-     */
-    public void editActivity() {
-        tempTask.setActive(activity);
+    public void editIsActive() {
+        bufferedTask.setActive(isActive);
     }
 
-    /**
-     * Method responsible for setting time for non-repeated task
-     */
-    public void editTimeNonRepeatedTasks() {
-        tempTask.setTime(start);
+    public void editTimeRepeating() {
+        bufferedTask.setTime(start, end, interval);
     }
 
-    /**
-     * Method responsible for setting time frames and intervals for repeated task
-     */
-    public void editTimeRepeatedTasks() {
-        tempTask.setTime(start, end, interval);
+    public void editTimeNotRepeating() {
+        bufferedTask.setTime(start);
     }
 
-    /**
-     * Method that returns a buffer task
-     *
-     * @return buffer task
-     */
-    public Task getTempTask() {
-        return tempTask;
+    public Task getBufferedTask() {
+        return bufferedTask;
     }
 
-    /**
-     * Method that clears buffer task
-     */
-    public void removeTempTask() {
-        logger.debug("Clear buffer task" + tempTask.toString());
-        tempTask = null;
+    public void clearBuffer() {
+        bufferedTask = null;
+        logger.debug("Task buffer cleared");
     }
 }

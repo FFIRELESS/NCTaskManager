@@ -29,6 +29,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
     public void add(Task task) {
         if (task == null) {
+            logger.error("Task object is null");
             throw new NullPointerException("Task object parameter is null");
         }
         if (tasks.length == taskAmount) {
@@ -39,11 +40,12 @@ public class ArrayTaskList extends AbstractTaskList {
         }
         tasks[taskAmount++] = task;
 
-        logger.debug("Added new task: " + task);
+        logger.debug("Task added: " + task);
     }
 
     public boolean remove(Task task) {
         if (task == null) {
+            logger.error("Task object is null");
             throw new NullPointerException("Task object parameter has null value!");
         }
 
@@ -84,6 +86,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
     public Task getTask(int index) {
         if (index < 0 || index >= taskAmount) {
+            logger.error("Task index is out of bound");
             throw new IndexOutOfBoundsException("Invalid task index!");
         }
         return tasks[index];
@@ -102,9 +105,7 @@ public class ArrayTaskList extends AbstractTaskList {
             @Override
             public Task next() {
                 if (index == taskAmount) {
-                    throw new NoSuchElementException(
-                            "An iterator reached the end of the list"
-                    );
+                    throw new NoSuchElementException("An iterator reached the end of the list");
                 }
                 return tasks[index++];
             }
@@ -112,9 +113,7 @@ public class ArrayTaskList extends AbstractTaskList {
             @Override
             public void remove() {
                 if (index == 0) {
-                    throw new IllegalStateException(
-                            "Iterator method next() wasn't called"
-                    );
+                    throw new IllegalStateException("Iterator method next() wasn't called");
                 }
 
                 index--;

@@ -8,31 +8,20 @@ import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.PrintTasksView;
 
 public class PrintTasksController extends BaseController {
-    protected static final Logger logger =
-            Logger.getLogger(PrintTasksController.class);
+    protected static final Logger logger = Logger.getLogger(PrintTasksController.class);
 
-    /**
-     * Cass to display information in the console
-     */
     private final PrintTasksView showAllTasksView = new PrintTasksView();
 
-    /**
-     * Method that manages the creation and display of all existing tasks
-     * @param taskList collection with tasks
-     * @return constant indicating which next action to perform in the program
-     */
     @Override
     public ProgramModes process(AbstractTaskList taskList) {
         if (DataTest.isEmptyList(taskList)) {
-            logger.debug("Display of all existing tasks " +taskList);
             showAllTasksView.printAllTasks(taskList);
+            logger.debug("Showing full tasks list");
 
         } else {
-            logger.debug("Collection is empty " +taskList);
-            ConsoleView.printTitle("You do not have any tasks. You must create them to view tasks.");
-
+            ConsoleView.printWarning("Задачі не знайдено");
+            logger.debug("Tasks list is empty");
         }
-
         return ProgramModes.MAIN_MENU;
     }
 }

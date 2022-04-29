@@ -1,42 +1,56 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.view;
 
 public class MainMenuView extends PrintTasksView {
+    public static void printHello() {
+        ConsoleView.newEmptyLine();
+        ConsoleView.printChooser("Привіт!       ");
+        ConsoleView.printTitle("Слава Україні!");
+    }
+
+    public static void printBye() {
+        ConsoleView.newEmptyLine();
+        ConsoleView.printChooser("Гарного дня :)                                          ");
+        ConsoleView.printTitle("Слава Україні, слава нації і пиZда російській федерації!");
+    }
+
     public void printMainMenu() {
         newEmptyLine();
-        printTitle("MAIN MENU");
-        printTitle("1. Create task");
-        printTitle("2. Edit the task");
-        printTitle("3. See tasks for the period");
-        printTitle("4. See all tasks");
-        printTitle("5. Save and quit");
+        printTitle("ГОЛОВНЕ МЕНЮ");
+        printTitle("1. Створити задачу");
+        printTitle("2. Редагувати задачу");
+        printTitle("3. Переглянути задачі за період");
+        printTitle("4. Переглянути всі задачі");
+        printTitle("5. Зберегти та вийти");
         newEmptyLine();
-        printChooser("Choose mode: ");
+        printChooser("Оберіть режим: ");
         // cls();
     }
 
     public void printAddMenu() {
         newEmptyLine();
-        printTitle("CREATE NEW TASK");
-        printTitle("1. Set task title");
-        printTitle("2. Make task active");
-        printTitle("3. Set time for repeating task");
-        printTitle("4. Set time for not repeating task");
-        printTitle("5. Create task and back");
+        printTitle("СТВОРЕННЯ НОВОЇ ЗАДАЧІ");
+        printTitle("1. Встановити назву");
+        printTitle("2. Активувати/деактивувати задачу");
+        printTitle("3. Встановити час та інтервал повторюваної задачі");
+        printTitle("4. Встановити час для неповторюваної задачі");
+        printTitle("5. Зберегти та повернутися");
+        printTitle("6. Повернутися");
         newEmptyLine();
-        printChooser("Choose mode: ");
+        printChooser("Оберіть режим: ");
         // cls();
     }
 
-    public void printChangeMenu() {
+    public void printEditMenu() {
         newEmptyLine();
-        printTitle("You are on the changing menu. Select one of the program functions: ");
-        printTitle("1. Set name");
-        printTitle("2. Activate task");
-        printTitle("3. Set time for repeated task");
-        printTitle("4. Set time for non-repeated task");
-        printTitle("5. Save and exit to main menu");
+        printTitle("РЕДАГУВАННЯ ЗАДАЧІ");
+        printTitle("0. Видалити задачу");
+        printTitle("1. Редагувати назву");
+        printTitle("2. Редагувати активність");
+        printTitle("3. Встановити час та інтервал повторюваної задачі");
+        printTitle("4. Встановити час для неповторюваної задачі");
+        printTitle("5. Зберегти та повернутися");
         newEmptyLine();
-        printChooser("Choose mode: ");
+        printChooser("Оберіть режим: ");
         // cls();
     }
 }

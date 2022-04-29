@@ -20,7 +20,7 @@ public class FileIOController extends BaseController {
         try {
             TaskIO.readText(tasks, file);
         } catch (Exception e) {
-            System.out.println("Reading error. File not found");
+            System.out.println("Помилка читання з файлу");
         }
         logger.debug("Reading tasks from file: " + file.getAbsolutePath());
         return tasks;
@@ -28,11 +28,10 @@ public class FileIOController extends BaseController {
 
     @Override
     public void writeFileProcess(AbstractTaskList listToSave) {
-
         try {
             TaskIO.writeText(listToSave, file);
         } catch (Exception e) {
-            System.out.println("Writing error. File not found");
+            System.out.println("Помилка запису до файлу");
         }
         logger.debug("Writing tasks to file: " + file.getAbsolutePath());
     }

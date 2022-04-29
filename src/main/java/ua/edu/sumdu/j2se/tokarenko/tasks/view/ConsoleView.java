@@ -1,5 +1,7 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.view;
 
+import java.io.IOException;
+
 public class ConsoleView {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -20,9 +22,7 @@ public class ConsoleView {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-    public static void lineSeparator() {
-        System.out.println(ANSI_BLACK + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + ANSI_RESET);
-    }
+    public static final String ANSI_ITALIC = "\033[3m";
 
     public static void newEmptyLine() {
         System.out.println();
@@ -31,12 +31,32 @@ public class ConsoleView {
     public static void printTitle(String title) {
         System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_BLACK + title + ANSI_RESET);
     }
-    public static void printChooser(String text) {
-        System.out.println(ANSI_GREEN_BACKGROUND + text + ANSI_RESET);
+
+    public static void printWarning(String text) {
+        System.out.println(ANSI_RED_BACKGROUND + ANSI_BLACK + text + ANSI_RESET);
     }
 
-    public static void cls() {
-        System.out.println("\033[H\033[2J");
-        System.out.flush();
+    public static void printParagraph(String text) {
+        System.out.println(ANSI_GREEN_BACKGROUND + ANSI_BLACK + text + ANSI_RESET);
+    }
+
+    public static void printTableHeading(String text) {
+        System.out.println(ANSI_YELLOW + text + ANSI_RESET);
+    }
+
+    public static void printChooser(String text) {
+        System.out.println(ANSI_BLUE_BACKGROUND + ANSI_BLACK + text + ANSI_RESET);
+    }
+
+    public static void printNote(String text) {
+        System.out.println(ANSI_YELLOW + ANSI_ITALIC + text + ANSI_RESET);
+    }
+
+    public static void cls() throws IOException, InterruptedException {
+        final String os = System.getProperty("os.name");
+        if (os.contains("Windows"))
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        else
+            Runtime.getRuntime().exec("clear");
     }
 }
