@@ -26,9 +26,9 @@ public class MainController extends BaseController {
         MainMenuView.printHello();
 
         // перевірка на українця
-//        if (!ConsoleInputController.nextUkrainian()) {
-//            System.exit(1);
-//        }
+        if (!ConsoleInputController.nextUkrainian()) {
+            System.exit(1);
+        }
 
         AbstractTaskList storedTasks = fileIOController.readFileProcess();
 

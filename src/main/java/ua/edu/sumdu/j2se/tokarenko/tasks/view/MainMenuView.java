@@ -17,7 +17,7 @@ public class MainMenuView extends PrintTasksView {
         newEmptyLine();
         printTitle("ГОЛОВНЕ МЕНЮ");
         printTitle("1. Створити задачу");
-        printTitle("2. Редагувати задачу");
+        printTitle("2. Редагувати/видалити задачу");
         printTitle("3. Переглянути задачі за період");
         printTitle("4. Переглянути всі задачі");
         printTitle("5. Зберегти та вийти");

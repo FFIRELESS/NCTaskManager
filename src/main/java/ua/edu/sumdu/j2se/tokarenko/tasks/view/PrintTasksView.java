@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 public class PrintTasksView extends ConsoleView {
     public void printTableShortHeader() {
         printTableHeading(String.valueOf(
-                Prettier.prettyTitle("Задача", 32)
+                Prettier.prettyTitle("Задача", 33)
                         .append(Prettier.prettyTitle("Активна", 10))
                         .append(Prettier.prettyTitle("Дата та час", 11))));
     }
 
     public void printTableFullHeader() {
         printTableHeading(String.valueOf(
-                Prettier.prettyTitle("Задача", 30)
+                Prettier.prettyTitle("Задача", 31)
                         .append(Prettier.prettyTitle("Активна", 9))
                         .append(Prettier.prettyTitle("Повтор", 9))
                         .append(Prettier.prettyTitle("Інтервал", 14))
@@ -27,7 +27,7 @@ public class PrintTasksView extends ConsoleView {
     public void printTableIndexHeader() {
         printTableHeading(String.valueOf(
                 Prettier.prettyTitle("№", 5)
-                        .append(Prettier.prettyTitle("Назва", 30))
+                        .append(Prettier.prettyTitle("Назва", 31))
                         .append(Prettier.prettyTitle("Активна", 9))
                         .append(Prettier.prettyTitle("Повтор", 9))
                         .append(Prettier.prettyTitle("Інтервал", 14))
@@ -61,7 +61,7 @@ public class PrintTasksView extends ConsoleView {
         StringBuilder printTask = new StringBuilder();
 
         printTask.append(ANSI_YELLOW + "* " + ANSI_RESET);
-        printTask.append(Prettier.prettyTitle(task.getTitle(), 30));
+        printTask.append(Prettier.prettyTitle(task.getTitle(), 30)).append(" ");
 
         if (task.isActive()) {
             printTask.append(Prettier.prettyTitle("✓ так", 10));
@@ -79,7 +79,7 @@ public class PrintTasksView extends ConsoleView {
             printTask.append(Prettier.prettyTitle(String.valueOf(idx), 5));
         }
 
-        printTask.append(Prettier.prettyTitle(task.getTitle(), 30));
+        printTask.append(Prettier.prettyTitle(task.getTitle(), 30)).append(" ");
 
         if (task.isActive()) {
             printTask.append(Prettier.prettyTitle("✓ так", 9));
