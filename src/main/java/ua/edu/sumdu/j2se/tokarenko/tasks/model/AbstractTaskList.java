@@ -53,7 +53,7 @@ public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
     }
 
     /**
-     * Метод, що порівнює об'єкти колекції.
+     * Метод порівняння об'єктів колекції.
      *
      * @param object задача, яка буде порівнюватись.
      * @return true якщо задачі однакові, інакше - false.
@@ -92,7 +92,10 @@ public abstract class AbstractTaskList implements Iterable<Task>, Serializable {
             hash ^= task.hashCode();
         }
 
-        if (type == ListTypes.types.ARRAY) {
+        hash >>= taskAmount;
+        hash <<= type.hashCode();
+
+        if (type == ListTypes.types.LINKED) {
             hash = ~hash;
         }
         return hash;

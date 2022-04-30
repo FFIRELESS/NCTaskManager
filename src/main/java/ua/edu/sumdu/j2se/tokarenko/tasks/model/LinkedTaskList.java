@@ -11,6 +11,9 @@ import java.util.stream.Stream;
 public class LinkedTaskList extends AbstractTaskList {
     private static final Logger logger = Logger.getLogger(LinkedTaskList.class);
 
+    public int taskAmount;
+    private LinkedListPointer first;
+
     static class LinkedListPointer {
         private Task storedTask;
         private LinkedListPointer next;
@@ -20,17 +23,28 @@ public class LinkedTaskList extends AbstractTaskList {
         type = ListTypes.types.LINKED;
     }
 
-    public int taskAmount;
-    private LinkedListPointer first;
-
+    /**
+     * Конструктор LinkedTaskList.
+     */
     public LinkedTaskList() {
         first = new LinkedListPointer();
     }
 
+    /**
+     * Імплементація методу батьківського класу, що повертає розмір колекції.
+     *
+     * @return розмір колекції.
+     */
     public int size() {
         return taskAmount;
     }
 
+    /**
+     * Імплементація методу батьківського класу для додавання задачі в колекцію.
+     *
+     * @param task - задача, що додається в колекцію.
+     * @throws NullPointerException якщо задача не задана.
+     */
     public void add(Task task) {
         if (task == null) {
             logger.error("Task object is null");
@@ -46,6 +60,13 @@ public class LinkedTaskList extends AbstractTaskList {
         logger.debug("Task added: " + task);
     }
 
+    /**
+     * Імплементація методу батьківського класу для видалення задачі з колекції.
+     *
+     * @param task - задача, що видаляється з колекції.
+     * @return true якщо задачу було видалено, false - задачу не знайдено в колекції.
+     * @throws NullPointerException якщо задача не задана.
+     */
     public boolean remove(Task task) {
         if (task == null) {
             logger.error("Task object is null");
@@ -72,6 +93,13 @@ public class LinkedTaskList extends AbstractTaskList {
         return false;
     }
 
+    /**
+     * Імплементація методу батьківського класу для пошуку задачі по індексу.
+     *
+     * @param index - індекс шуканої задачі.
+     * @return шукану задачу.
+     * @throws IndexOutOfBoundsException якщо індекс за межами розміру колекції.
+     */
     public Task getTask(int index) {
         if (index < 0 || index >= taskAmount) {
             logger.error("Index of task is out of bound");
@@ -87,6 +115,11 @@ public class LinkedTaskList extends AbstractTaskList {
         return searchPointer.storedTask;
     }
 
+    /**
+     * Імплементація ітератору батьківського класу.
+     *
+     * @return ітератор для даної колекції.
+     */
     @Override
     public Iterator<Task> iterator() {
         return new Iterator<Task>() {
@@ -123,6 +156,11 @@ public class LinkedTaskList extends AbstractTaskList {
         };
     }
 
+    /**
+     * Метод клонування об'єктів класу LinkedTaskList.
+     *
+     * @return копію об'єкту.
+     */
     @Override
     public LinkedTaskList clone() {
         LinkedTaskList finalObject = new LinkedTaskList();
@@ -135,6 +173,11 @@ public class LinkedTaskList extends AbstractTaskList {
         return finalObject;
     }
 
+    /**
+     * Імплементація методу батьківського класу, що повертає потік колекції.
+     *
+     * @return потік колекції.
+     */
     @Override
     public Stream<Task> getStream() {
         ArrayList<Task> stream = new ArrayList<>(taskAmount);

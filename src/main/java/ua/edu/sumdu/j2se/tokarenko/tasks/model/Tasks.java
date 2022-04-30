@@ -4,6 +4,16 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Tasks {
+    /**
+     * Метод пошуку задач в заданому періоді.
+     *
+     * @param tasks колекція задач.
+     * @param start початковий час періоду.
+     * @param end   кінцевий час періоду.
+     * @return Iterable<Task> колекцію задач в заданому періоді.
+     * @throws NullPointerException     якщо часовий аргумент = null.
+     * @throws IllegalArgumentException якщо початковий час >= кінцевому.
+     */
     static public Iterable<Task> incoming(Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {
         if (tasks == null) {
             throw new IllegalArgumentException("Iterable<Task> parameter is null");
@@ -30,6 +40,16 @@ public class Tasks {
         return finalArray;
     }
 
+    /**
+     * Метод, що повертає сортований календар із задачами за заданий період.
+     *
+     * @param tasks колекція задач.
+     * @param start початковий час періоду.
+     * @param end   кінцевий час періоду.
+     * @return SortedMap<LocalDateTime, Set < Task>> колекція-календар задач.
+     * @throws NullPointerException     якщо часовий аргумент = null.
+     * @throws IllegalArgumentException якщо початковий час >= кінцевому.
+     */
     static public SortedMap<LocalDateTime, Set<Task>>
     calendar(Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {
         TreeMap<LocalDateTime, Set<Task>> newCalendar = new TreeMap<>();

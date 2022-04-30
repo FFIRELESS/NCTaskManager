@@ -8,7 +8,12 @@ import java.io.*;
 public class TaskIO {
     private static final Logger logger = Logger.getLogger(TaskIO.class);
 
-    // запись списка задач tasks в поток в бинарном виде
+    /**
+     * Метод запису задач в потік в бінарному вигляді.
+     *
+     * @param tasks колекція задач.
+     * @param out   вихідний потік OutputStream.
+     */
     public static void write(AbstractTaskList tasks, OutputStream out) {
         try (ObjectOutputStream listStream = new ObjectOutputStream(out)) {
             logger.debug("Writing task list in binary format to the stream");
@@ -24,7 +29,12 @@ public class TaskIO {
         }
     }
 
-    // чтение списка задач tasks из потока в бинарном виде
+    /**
+     * Метод зчитування задач з потоку в бінарному вигляді.
+     *
+     * @param tasks колекція задач.
+     * @param in    вхідний потікInputStream.
+     */
     public static void read(AbstractTaskList tasks, InputStream in) {
         try (ObjectInputStream listStream = new ObjectInputStream(in)) {
             logger.debug("Reading task list in binary format from the stream");
@@ -43,7 +53,13 @@ public class TaskIO {
         }
     }
 
-    // запись в файл список задач tasks в бинарном виде
+    /**
+     * Метод запису списку задач у файл в бінарному вигляді.
+     *
+     * @param tasks колекція задач.
+     * @param file  бінарний файл.
+     * @throws FileNotFoundException коли файл не було знайдено.
+     */
     public static void writeBinary(AbstractTaskList tasks, File file) throws FileNotFoundException {
         try (ObjectOutputStream listStream = new ObjectOutputStream(new FileOutputStream(file))) {
             logger.debug("Writing task list in binary format to the file");
@@ -62,7 +78,13 @@ public class TaskIO {
         }
     }
 
-    // чтение бинарных данных из файла в список задач tasks
+    /**
+     * Метод зчитування списку задач з файлу в бінарному вигляді.
+     *
+     * @param tasks колекція задач.
+     * @param file  бінарний файл.
+     * @throws FileNotFoundException коли файл не було знайдено.
+     */
     public static void readBinary(AbstractTaskList tasks, File file) throws FileNotFoundException {
         try (ObjectInputStream listStream = new ObjectInputStream(new FileInputStream(file))) {
             logger.debug("Reading task list in binary format from the file");
@@ -84,7 +106,12 @@ public class TaskIO {
         }
     }
 
-    // запись списка задач tasks в поток
+    /**
+     * Метод запису списку задач в потік.
+     *
+     * @param tasks колекція задач.
+     * @param out   вихідний потік Writer.
+     */
     public static void write(AbstractTaskList tasks, Writer out) {
         try (BufferedWriter listStream = new BufferedWriter(out)) {
             logger.debug("Writing task list as text to the stream");
@@ -104,7 +131,12 @@ public class TaskIO {
         }
     }
 
-    // чтение из потока в список задач tasks
+    /**
+     * Метод зчитування списку задач з потоку.
+     *
+     * @param tasks колекція задач.
+     * @param in    вхідний потік Reader.
+     */
     public static void read(AbstractTaskList tasks, Reader in) {
         try (LineNumberReader listStream = new LineNumberReader(in)) {
             logger.debug("Reading task list as text from the stream");
@@ -123,7 +155,13 @@ public class TaskIO {
         }
     }
 
-    // запись списка задач tasks в файл в текстовом формате
+    /**
+     * Метод запису списку задач до файлу в текстовому форматі.
+     *
+     * @param tasks колекція задач.
+     * @param file  файл json.
+     * @throws FileNotFoundException коли файл не було знайдено.
+     */
     public static void writeText(AbstractTaskList tasks, File file) throws FileNotFoundException {
         try (Writer writeStream = new OutputStreamWriter(new FileOutputStream(file))) {
             logger.debug("Writing task list as text to the file");
@@ -138,7 +176,13 @@ public class TaskIO {
         }
     }
 
-    // чтение текста из файла в список задач tasks
+    /**
+     * Метод зчитування списку задач з файлу в текстовому форматі.
+     *
+     * @param tasks колекція задач.
+     * @param file  файл json.
+     * @throws FileNotFoundException коли файл не було знайдено.
+     */
     public static void readText(AbstractTaskList tasks, File file) throws FileNotFoundException {
         try (Reader readStream = new InputStreamReader(new FileInputStream(file))) {
             logger.debug("Reading task list as text from the file");
