@@ -11,6 +11,13 @@ public class MainMenuController extends BaseController {
 
     private final MainMenuView mainMenuView = new MainMenuView();
 
+    /**
+     * Метод контролю дій меню створення та редагування задачі.
+     *
+     * @param var обраний пункт меню.
+     * @return наступний(обраний) режим програми.
+     * @throws NullPointerException якщо режим програми невірний.
+     */
     private ProgramModes addEditMenu(int var) {
         switch (var) {
             case 0:
@@ -33,6 +40,12 @@ public class MainMenuController extends BaseController {
         }
     }
 
+    /**
+     * Метод контролю дій головного меню.
+     *
+     * @param var обраний пункт меню.
+     * @return наступний(обраний) режим програми.
+     */
     private ProgramModes mainMenu(int var) {
         switch (var) {
             case 1:
@@ -51,6 +64,12 @@ public class MainMenuController extends BaseController {
         }
     }
 
+    /**
+     * Метод контролю всіх меню програми.
+     *
+     * @param mode режим програми.
+     * @return наступний(обраний) режим програми.
+     */
     @Override
     public ProgramModes process(ProgramModes mode) {
         int var;

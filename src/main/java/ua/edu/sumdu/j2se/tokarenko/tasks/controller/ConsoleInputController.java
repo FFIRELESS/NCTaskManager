@@ -18,6 +18,9 @@ public class ConsoleInputController extends BaseController {
     private static String strValue;
     private static int intValue = 0;
 
+    /**
+     * Метод перевірки правильності введення числа.
+     */
     private static void checkInt() {
         if (DataTest.isEmptyString(strValue)) {
             logger.debug("String input error");
@@ -32,6 +35,9 @@ public class ConsoleInputController extends BaseController {
         }
     }
 
+    /**
+     * Метод перевірки правильності введення дати.
+     */
     private static void checkDate() {
         if (DataTest.isEmptyString(strValue)) {
             logger.debug("String input error");
@@ -46,6 +52,11 @@ public class ConsoleInputController extends BaseController {
         }
     }
 
+    /**
+     * Метод перевірки правильності введення рядку.
+     *
+     * @return введений користувачем рядок.
+     */
     public static String nextString() {
         do {
             error = false;
@@ -63,6 +74,11 @@ public class ConsoleInputController extends BaseController {
         return strValue;
     }
 
+    /**
+     * Метод перевірки числа на негативність або 0.
+     *
+     * @return введене користувачем число.
+     */
     public static int nextInt() {
         do {
             error = false;
@@ -82,6 +98,13 @@ public class ConsoleInputController extends BaseController {
         return intValue;
     }
 
+    /**
+     * Метод перевірки числа в заданому інтервалі.
+     *
+     * @param from - початкове значення інтервалу.
+     * @param to   - кінцеве значення інтервалу.
+     * @return введене користувачем число.
+     */
     public static int nextIntInRange(int from, int to) {
         do {
             error = false;
@@ -101,6 +124,11 @@ public class ConsoleInputController extends BaseController {
         return intValue;
     }
 
+    /**
+     * Метод перевірки правильності введення даних типу boolean.
+     *
+     * @return введене користувачем значення.
+     */
     public static boolean nextBoolean() {
         do {
             error = false;
@@ -126,7 +154,12 @@ public class ConsoleInputController extends BaseController {
         return boolValue;
     }
 
-    public static LocalDateTime nextTime() {
+    /**
+     * Метод перевірки дати, яка не повинна перевищувати поточну.
+     *
+     * @return введена користувачем дата.
+     */
+    public static LocalDateTime nextDate() {
         do {
             error = false;
             strValue = in.nextLine();
@@ -145,6 +178,11 @@ public class ConsoleInputController extends BaseController {
         return timeValue;
     }
 
+    /**
+     * Метод перевірки календарної дати.
+     *
+     * @return введена користувачем дата.
+     */
     public static LocalDateTime nextCalendarDate() {
         do {
             error = false;
@@ -164,6 +202,12 @@ public class ConsoleInputController extends BaseController {
         return timeValue;
     }
 
+    /**
+     * Метод перевірки правильності введення кінцевої дати відносно початкової.
+     *
+     * @param start - початкова дата.
+     * @return введена користувачем кінцева дата.
+     */
     public static LocalDateTime nextEndDate(LocalDateTime start) {
         do {
             error = false;
@@ -188,7 +232,11 @@ public class ConsoleInputController extends BaseController {
         return timeValue;
     }
 
-    // перевірка на українця
+    /**
+     * Метод перевірки користувача на українське походження.
+     *
+     * @return true - якщо користувач - справжній козак, false - ...співчуваю, йому дуже не пощастило)))
+     */
     public static boolean nextUkrainian() {
         int attempts = 3;
 

@@ -1,18 +1,27 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.view;
 
 public class MainMenuView extends PrintTasksView {
+    /**
+     * Метод, що виводить привітання.
+     */
     public static void printHello() {
         ConsoleView.newEmptyLine();
         ConsoleView.printChooser("Привіт!       ");
         ConsoleView.printTitle("Слава Україні!");
     }
 
+    /**
+     * Метод, що виводить прощання.
+     */
     public static void printBye() {
         ConsoleView.newEmptyLine();
         ConsoleView.printChooser("Гарного дня :)                                          ");
         ConsoleView.printTitle("Слава Україні, слава нації і пиZда російській федерації!");
     }
 
+    /**
+     * Метод, що виводить головне меню.
+     */
     public void printMainMenu() {
         newEmptyLine();
         printTitle("ГОЛОВНЕ МЕНЮ");
@@ -26,6 +35,9 @@ public class MainMenuView extends PrintTasksView {
         // cls();
     }
 
+    /**
+     * Метод, що виводить меню створення задачі.
+     */
     public void printAddMenu() {
         newEmptyLine();
         printTitle("СТВОРЕННЯ НОВОЇ ЗАДАЧІ");
@@ -40,6 +52,9 @@ public class MainMenuView extends PrintTasksView {
         // cls();
     }
 
+    /**
+     * Метод, що виводить меню редагування задачі.
+     */
     public void printEditMenu() {
         newEmptyLine();
         printTitle("РЕДАГУВАННЯ ЗАДАЧІ");

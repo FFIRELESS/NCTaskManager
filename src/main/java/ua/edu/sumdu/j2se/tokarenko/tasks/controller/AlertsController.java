@@ -18,6 +18,12 @@ public class AlertsController extends BaseController {
 
     private final PrintCalendarView view = new PrintCalendarView();
 
+    /**
+     * Метод визначення та контролю термінових задач.
+     *
+     * @param taskList колекція задач.
+     * @return наступний(обраний) режим програми.
+     */
     @Override
     public ProgramModes process(AbstractTaskList taskList) {
         if (DataTest.isEmptyList(taskList)) {

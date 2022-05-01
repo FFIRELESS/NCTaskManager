@@ -9,6 +9,14 @@ import ua.edu.sumdu.j2se.tokarenko.tasks.view.PrintTasksView;
 import static ua.edu.sumdu.j2se.tokarenko.tasks.utils.Exceptions.unknownModeException;
 
 public class EditTaskController extends TaskActionsController {
+    /**
+     * Метод контролю редагування задачі.
+     *
+     * @param taskList колекція задач.
+     * @param mode     режим програми.
+     * @return наступний(обраний) режим програми.
+     * @throws NullPointerException якщо режим програми невірний.
+     */
     @Override
     public ProgramModes process(AbstractTaskList taskList, ProgramModes mode) {
         if (getBufferedTask() == null) {
@@ -51,9 +59,9 @@ public class EditTaskController extends TaskActionsController {
 
             case SET_REPEATING_TIME:
                 taskActionsView.setTaskStartTime();
-                start = ConsoleInputController.nextTime();
+                start = ConsoleInputController.nextDate();
                 taskActionsView.setTaskEndTime();
-                end = ConsoleInputController.nextTime();
+                end = ConsoleInputController.nextDate();
                 taskActionsView.setTaskNewInterval();
                 interval = ConsoleInputController.nextInt();
                 editTimeRepeating();
@@ -61,7 +69,7 @@ public class EditTaskController extends TaskActionsController {
 
             case SET_NON_REPEATING_TIME:
                 taskActionsView.setTaskStartTime();
-                start = ConsoleInputController.nextTime();
+                start = ConsoleInputController.nextDate();
                 editTimeNotRepeating();
                 break;
 

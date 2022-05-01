@@ -24,14 +24,30 @@ public class PrintCalendarController extends BaseController {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
-    public void setEndPeriod(LocalDateTime end) {
-        this.end = end;
-    }
-
+    /**
+     * Метод встановлення початкової дати шуканого періоду.
+     *
+     * @param start початкова дата періоду.
+     */
     public void setStartPeriod(LocalDateTime start) {
         this.start = start;
     }
 
+    /**
+     * Метод встановлення кінцевої дати шуканого періоду.
+     *
+     * @param end кінцева дата періоду.
+     */
+    public void setEndPeriod(LocalDateTime end) {
+        this.end = end;
+    }
+
+    /**
+     * Метод створення та виведення календаря задач за заданий період.
+     *
+     * @param taskList колекція задач.
+     * @return наступний(обраний) режим програми.
+     */
     @Override
     public ProgramModes process(AbstractTaskList taskList) {
         taskActionsView.setPeriodStartTime();

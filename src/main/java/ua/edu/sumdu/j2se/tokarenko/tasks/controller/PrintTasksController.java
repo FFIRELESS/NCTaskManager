@@ -12,6 +12,12 @@ public class PrintTasksController extends BaseController {
 
     private final PrintTasksView showAllTasksView = new PrintTasksView();
 
+    /**
+     * Метод контролю виведення повного списку всіх існуючих задач.
+     *
+     * @param taskList колекція задач.
+     * @return наступний(обраний) режим програми.
+     */
     @Override
     public ProgramModes process(AbstractTaskList taskList) {
         if (DataTest.isEmptyList(taskList)) {

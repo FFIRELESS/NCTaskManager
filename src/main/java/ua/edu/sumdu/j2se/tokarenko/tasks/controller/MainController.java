@@ -19,13 +19,15 @@ public class MainController extends BaseController {
 
     ProgramModes mode = ProgramModes.MAIN_MENU;
 
+    /**
+     * Метод, що контролює роботу всієї програми
+     */
     @Override
     public void process() {
         logger.debug("Program started");
 
         MainMenuView.printHello();
 
-        // перевірка на українця
         if (!ConsoleInputController.nextUkrainian()) {
             System.exit(1);
         }

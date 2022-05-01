@@ -13,6 +13,11 @@ public class FileIOController extends BaseController {
 
     private final File file = new File("savedTasks.json");
 
+    /**
+     * Метод зчитування задач з файлу json.
+     *
+     * @return колекція задач.
+     */
     @Override
     public AbstractTaskList readFileProcess() {
         AbstractTaskList tasks = TaskListFactory.createTaskList(ListTypes.types.ARRAY);
@@ -26,10 +31,15 @@ public class FileIOController extends BaseController {
         return tasks;
     }
 
+    /**
+     * Метод запису задач до файлу json.
+     *
+     * @param taskList колекція задач.
+     */
     @Override
-    public void writeFileProcess(AbstractTaskList listToSave) {
+    public void writeFileProcess(AbstractTaskList taskList) {
         try {
-            TaskIO.writeText(listToSave, file);
+            TaskIO.writeText(taskList, file);
         } catch (Exception e) {
             System.out.println("Помилка запису до файлу");
         }

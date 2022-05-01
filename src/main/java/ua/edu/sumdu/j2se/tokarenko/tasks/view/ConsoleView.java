@@ -24,34 +24,70 @@ public class ConsoleView {
 
     public static final String ANSI_ITALIC = "\033[3m";
 
+    /**
+     * Метод, що виводить порожній рядок.
+     */
     public static void newEmptyLine() {
         System.out.println();
     }
 
+    /**
+     * Метод, що виводить форматовану назву.
+     *
+     * @param title неформатований текст.
+     */
     public static void printTitle(String title) {
         System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_BLACK + title + ANSI_RESET);
     }
 
+    /**
+     * Метод, що виводить форматоване попередження.
+     *
+     * @param text неформатований текст.
+     */
     public static void printWarning(String text) {
         System.out.println(ANSI_RED_BACKGROUND + ANSI_BLACK + text + ANSI_RESET);
     }
 
+    /**
+     * Метод, що виводить форматований параграф.
+     *
+     * @param text неформатований текст.
+     */
     public static void printParagraph(String text) {
         System.out.println(ANSI_GREEN_BACKGROUND + ANSI_BLACK + text + ANSI_RESET);
     }
 
+    /**
+     * Метод, що виводить форматовану шапку таблиці.
+     *
+     * @param text неформатований текст.
+     */
     public static void printTableHeading(String text) {
         System.out.println(ANSI_YELLOW + text + ANSI_RESET);
     }
 
+    /**
+     * Метод, що виводить форматоване поле вибору варіанту.
+     *
+     * @param text неформатований текст.
+     */
     public static void printChooser(String text) {
         System.out.println(ANSI_BLUE_BACKGROUND + ANSI_BLACK + text + ANSI_RESET);
     }
 
+    /**
+     * Метод, що виводить форматовану замітку.
+     *
+     * @param text неформатований текст.
+     */
     public static void printNote(String text) {
         System.out.println(ANSI_YELLOW + ANSI_ITALIC + text + ANSI_RESET);
     }
 
+    /**
+     * Метод очищення консолі.
+     */
     public static void cls() throws IOException, InterruptedException {
         final String os = System.getProperty("os.name");
         if (os.contains("Windows"))

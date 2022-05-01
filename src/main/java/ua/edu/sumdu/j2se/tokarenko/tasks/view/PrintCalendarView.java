@@ -7,6 +7,11 @@ import java.util.Set;
 import java.util.SortedMap;
 
 public class PrintCalendarView extends PrintTasksView {
+    /**
+     * Метод, що виводить календарний список задач.
+     *
+     * @param taskMap сортований календар із задачами.
+     */
     public void printCalendarTasks(SortedMap<LocalDateTime, Set<Task>> taskMap) {
         printTableShortHeader();
 

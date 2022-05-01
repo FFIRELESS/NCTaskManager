@@ -6,7 +6,13 @@ import java.time.temporal.ChronoUnit;
 import static ua.edu.sumdu.j2se.tokarenko.tasks.utils.Exceptions.nullArgumentException;
 
 public class Prettier {
-    static public StringBuilder prettyTwoDigitTime(long time){
+    /**
+     * Метод форматування часу в двоцифровий.
+     *
+     * @param time час, що форматується.
+     * @return форматований час.
+     */
+    static public StringBuilder prettyTwoDigitTime(long time) {
         StringBuilder prettyTime = new StringBuilder();
 
         if (String.valueOf(time).length() == 1) {
@@ -17,6 +23,12 @@ public class Prettier {
         return prettyTime;
     }
 
+    /**
+     * Метод форматування дати.
+     *
+     * @param date дата, що форматується.
+     * @return форматована дата.
+     */
     static public StringBuilder prettyDate(LocalDateTime date) {
         StringBuilder prettyDate = new StringBuilder();
 
@@ -57,16 +69,24 @@ public class Prettier {
         return prettyDate;
     }
 
-    static public StringBuilder prettyTitle(String title, int fieldLength) {
+    /**
+     * Метод форматування тексту в межах заданої довжини поля.
+     *
+     * @param text        текст, що форматується.
+     * @param fieldLength довжина поля.
+     * @return форматований текст.
+     * @throws IllegalArgumentException - якщо рядок пустий.
+     */
+    static public StringBuilder prettyText(String text, int fieldLength) {
         StringBuilder formattedTitle = new StringBuilder();
 
-        if (DataTest.isEmptyString(title)) {
+        if (DataTest.isEmptyString(text)) {
             throw nullArgumentException;
         }
 
         for (int i = 0; i < fieldLength; ++i) {
-            if (i < title.length()) {
-                formattedTitle.append(title.charAt(i));
+            if (i < text.length()) {
+                formattedTitle.append(text.charAt(i));
             } else {
                 formattedTitle.append(" ");
             }
@@ -74,6 +94,14 @@ public class Prettier {
         return formattedTitle;
     }
 
+    /**
+     * Метод форматування інтервалу дат в межах заданої довжини поля.
+     *
+     * @param interval    інтервал в секундах.
+     * @param start       початкова дата інтервалу.
+     * @param fieldLength довжина поля.
+     * @return форматований інтервал.
+     */
     static public StringBuilder prettyInterval(int interval, LocalDateTime start, int fieldLength) {
         LocalDateTime endInt = start.plusSeconds(interval);
         StringBuilder formattedInterval = new StringBuilder();
