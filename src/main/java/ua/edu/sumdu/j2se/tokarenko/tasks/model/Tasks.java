@@ -10,7 +10,7 @@ public class Tasks {
      * @param tasks колекція задач.
      * @param start початковий час періоду.
      * @param end   кінцевий час періоду.
-     * @return Iterable<Task> колекцію задач в заданому періоді.
+     * @return колекцію задач в заданому періоді.
      * @throws NullPointerException     якщо часовий аргумент = null.
      * @throws IllegalArgumentException якщо початковий час >= кінцевому.
      */
@@ -46,7 +46,7 @@ public class Tasks {
      * @param tasks колекція задач.
      * @param start початковий час періоду.
      * @param end   кінцевий час періоду.
-     * @return SortedMap<LocalDateTime, Set < Task>> колекція-календар задач.
+     * @return колекція-календар задач.
      * @throws NullPointerException     якщо часовий аргумент = null.
      * @throws IllegalArgumentException якщо початковий час >= кінцевому.
      */
