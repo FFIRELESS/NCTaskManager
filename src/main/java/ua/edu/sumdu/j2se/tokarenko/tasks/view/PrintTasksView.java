@@ -2,7 +2,6 @@ package ua.edu.sumdu.j2se.tokarenko.tasks.view;
 
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Task;
-import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.Prettier;
 
 import java.time.LocalDateTime;
@@ -49,17 +48,14 @@ public class PrintTasksView extends ConsoleView {
      * Метод, що виводить розширену таблицю задач.
      *
      * @param taskList колекція задач.
-     * @param user     поточний користувач.
      */
-    public void printAllTasks(AbstractTaskList taskList, User user) {
+    public void printAllTasks(AbstractTaskList taskList) {
         newEmptyLine();
         printTitle("Повний список задач: ");
         printTableFullHeader();
 
         for (Task task : taskList) {
-            if (task.getUserId().equals(user.getUserId())) {
-                printFullTaskInfo(task, -1);
-            }
+            printFullTaskInfo(task, -1);
         }
         newEmptyLine();
     }
@@ -68,17 +64,14 @@ public class PrintTasksView extends ConsoleView {
      * Метод, що виводить розширену таблицю задач з індексами.
      *
      * @param taskList колекція задач.
-     * @param user     поточний користувач.
      */
-    public void printAllTasksWithIndex(AbstractTaskList taskList, User user) {
+    public void printAllTasksWithIndex(AbstractTaskList taskList) {
         newEmptyLine();
         printTitle("Ваші задачі: ");
         printTableIndexHeader();
 
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.getTask(i).getUserId().equals(user.getUserId())) {
-                printFullTaskInfo(taskList.getTask(i), i);
-            }
+            printFullTaskInfo(taskList.getTask(i), i);
         }
         newEmptyLine();
     }

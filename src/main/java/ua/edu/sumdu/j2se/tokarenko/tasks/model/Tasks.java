@@ -44,7 +44,6 @@ public class Tasks {
      * Метод, що повертає сортований календар із задачами за заданий період.
      *
      * @param tasks колекція задач.
-     * @param user  поточний користувач.
      * @param start початковий час періоду.
      * @param end   кінцевий час періоду.
      * @return колекція-календар задач.
@@ -52,7 +51,7 @@ public class Tasks {
      * @throws IllegalArgumentException якщо початковий час >= кінцевому.
      */
     static public SortedMap<LocalDateTime, Set<Task>>
-    calendar(Iterable<Task> tasks, User user, LocalDateTime start, LocalDateTime end) {
+    calendar(Iterable<Task> tasks, LocalDateTime start, LocalDateTime end) {
         TreeMap<LocalDateTime, Set<Task>> newCalendar = new TreeMap<>();
         LocalDateTime begin;
         Set<Task> pointerSet;
@@ -60,24 +59,22 @@ public class Tasks {
         tasks = incoming(tasks, start, end);
 
         for (Task task : tasks) {
-            if (task.getUserId().equals(user.getUserId())) {
-                begin = start;
+            begin = start;
 
-                while (true) {
-                    begin = task.nextTimeAfter(begin);
+            while (true) {
+                begin = task.nextTimeAfter(begin);
 
-                    if (begin == null || begin.isAfter(end)) {
-                        break;
-                    }
-
-                    if (newCalendar.containsKey(begin)) {
-                        pointerSet = newCalendar.get(begin);
-                    } else {
-                        pointerSet = new HashSet<>();
-                        newCalendar.put(begin, pointerSet);
-                    }
-                    pointerSet.add(task);
+                if (begin == null || begin.isAfter(end)) {
+                    break;
                 }
+
+                if (newCalendar.containsKey(begin)) {
+                    pointerSet = newCalendar.get(begin);
+                } else {
+                    pointerSet = new HashSet<>();
+                    newCalendar.put(begin, pointerSet);
+                }
+                pointerSet.add(task);
             }
         }
         return newCalendar;

@@ -184,44 +184,6 @@ public class ConsoleInputController extends BaseController {
     }
 
     /**
-     * Метод перевірки номеру задачі користувача в повному списку задач.
-     *
-     * @param tasks - колекція задач.
-     * @param user  - колекція користувачів.
-     * @return введене користувачем число.
-     */
-    public static int nextIntInUserTasks(AbstractTaskList tasks, User user) {
-        do {
-            ArrayList<Integer> allowedValues = new ArrayList<>();
-
-            error = false;
-            strValue = in.nextLine();
-
-            checkInt();
-
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.getTask(i).getUserId().equals(user.getUserId())) {
-                    allowedValues.add(i);
-                }
-            }
-
-            for (Integer integer : allowedValues) {
-                if (integer.equals(intValue)) {
-                    error = false;
-                    break;
-                } else {
-                    error = true;
-                }
-            }
-
-            if (error) {
-                System.out.print("Невірні дані. Спробуйте ще раз: ");
-            }
-        } while (error);
-        return intValue;
-    }
-
-    /**
      * Метод перевірки правильності введення даних типу boolean.
      *
      * @return введене користувачем значення.

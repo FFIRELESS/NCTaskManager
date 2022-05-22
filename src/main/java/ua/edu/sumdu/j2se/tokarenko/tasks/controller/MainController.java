@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.ArrayTaskList;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.ArrayUserList;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
@@ -17,10 +18,12 @@ public class MainController extends BaseController {
     private final BaseController authMenuController = new AuthMenuController();
     private final BaseController authController = new AuthController();
     private final BaseController registerController = new RegisterController();
+    private final BaseController getUserTasksController = new GetUserTasksController();
     private final BaseController createTaskController = new CreateTaskController();
     private final BaseController editTaskController = new EditTaskController();
     private final BaseController printCalendarController = new PrintCalendarController();
     private final BaseController printTasksController = new PrintTasksController();
+    private final BaseController savingController = new SavingController();
     private final BaseController fileIOController = new FileIOController();
     private final AlertsController alertsController = new AlertsController();
 
@@ -61,36 +64,38 @@ public class MainController extends BaseController {
         }
 
         User currentUser = UserActionsController.getBufferedUser();
+        ArrayTaskList userTasks = getUserTasksController.process(storedTasks, currentUser);
 
         while (!mode.equals(ProgramModes.EXIT)) {
             if (mode.equals(ProgramModes.MAIN_MENU)) {
-                alertsController.process(storedTasks, currentUser);
-                todayTasksController.process(storedTasks, currentUser);
+                alertsController.process(userTasks);
+                todayTasksController.process(userTasks);
                 mode = mainMenuController.process(mode);
             }
 
             switch (mode) {
                 case ADD:
                     mode = mainMenuController.process(mode);
-                    mode = createTaskController.process(storedTasks, mode, currentUser);
+                    mode = createTaskController.process(userTasks, mode, currentUser);
                     break;
                 case EDIT:
-                    mode = editTaskController.process(storedTasks, ProgramModes.SKIP, currentUser);
+                    mode = editTaskController.process(userTasks, ProgramModes.SKIP);
                     if (mode.equals(ProgramModes.MAIN_MENU)) {
                         break;
                     }
                     mode = mainMenuController.process(mode);
-                    mode = editTaskController.process(storedTasks, mode, currentUser);
+                    mode = editTaskController.process(userTasks, mode);
                     break;
                 case PRINT_CALENDAR:
-                    mode = printCalendarController.process(storedTasks, currentUser);
+                    mode = printCalendarController.process(userTasks);
                     break;
                 case PRINT_ALL:
-                    mode = printTasksController.process(storedTasks, currentUser);
+                    mode = printTasksController.process(userTasks);
                     break;
             }
         }
         MainMenuView.printBye();
+        savingController.process(storedTasks, userTasks);
         fileIOController.writeTasksFileProcess(storedTasks);
         fileIOController.writeUsersFileProcess(storedUsers);
 

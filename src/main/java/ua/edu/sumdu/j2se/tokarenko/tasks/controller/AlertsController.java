@@ -23,13 +23,12 @@ public class AlertsController extends BaseController {
      * Метод визначення та контролю термінових задач.
      *
      * @param taskList колекція задач.
-     * @param user поточний користувач.
      * @return наступний(обраний) режим програми.
      */
     @Override
-    public ProgramModes process(AbstractTaskList taskList, User user) {
+    public ProgramModes process(AbstractTaskList taskList) {
         if (DataTest.isEmptyList(taskList)) {
-            SortedMap<LocalDateTime, Set<Task>> taskMap = Tasks.calendar(taskList, user,
+            SortedMap<LocalDateTime, Set<Task>> taskMap = Tasks.calendar(taskList,
                     LocalDateTime.now(), LocalDateTime.now().plusMinutes(30));
 
             if (!taskMap.isEmpty()) {

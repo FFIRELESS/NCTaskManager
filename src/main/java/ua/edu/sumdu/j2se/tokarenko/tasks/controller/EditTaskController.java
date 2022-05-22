@@ -1,7 +1,6 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
-import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
@@ -15,24 +14,23 @@ public class EditTaskController extends TaskActionsController {
      *
      * @param taskList колекція задач.
      * @param mode     режим програми.
-     * @param user     поточний користувач.
      * @return наступний(обраний) режим програми.
      * @throws NullPointerException якщо режим програми невірний.
      */
     @Override
-    public ProgramModes process(AbstractTaskList taskList, ProgramModes mode, User user) {
+    public ProgramModes process(AbstractTaskList taskList, ProgramModes mode) {
         if (getBufferedTask() == null) {
-            if (DataTest.isNotEmptyUserTaskList(taskList, user)) {
+            if (DataTest.isEmptyList(taskList)) {
                 PrintTasksView allTasksView = new PrintTasksView();
 
                 ConsoleView.newEmptyLine();
                 ConsoleView.printParagraph("Оберіть задачу для редагування з таблиці нижче");
-                allTasksView.printAllTasksWithIndex(taskList, user);
+                allTasksView.printAllTasksWithIndex(taskList);
 
                 taskActionsView.setTaskNumber();
 
                 try {
-                    selectedTask(taskList, ConsoleInputController.nextIntInUserTasks(taskList, user));
+                    selectedTask(taskList, ConsoleInputController.nextIntInRange(0, taskList.size() - 1));
                     return ProgramModes.EDIT;
                 } catch (CloneNotSupportedException e) {
                     logger.error("Exception: " + e);

@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Task;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Tasks;
-import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.PrintCalendarView;
@@ -47,17 +46,16 @@ public class PrintCalendarController extends BaseController {
      * Метод створення та виведення календаря задач за заданий період.
      *
      * @param taskList колекція задач.
-     * @param user     поточний користувач.
      * @return наступний(обраний) режим програми.
      */
     @Override
-    public ProgramModes process(AbstractTaskList taskList, User user) {
+    public ProgramModes process(AbstractTaskList taskList) {
         taskActionsView.setPeriodStartTime();
         setStartPeriod(ConsoleInputController.nextCalendarDate());
         taskActionsView.setPeriodEndTime();
         setEndPeriod(ConsoleInputController.nextCalendarDate());
 
-        calendarTasks = Tasks.calendar(taskList, user, start, end);
+        calendarTasks = Tasks.calendar(taskList, start, end);
 
         if (calendarTasks.isEmpty()) {
             newEmptyLine();
