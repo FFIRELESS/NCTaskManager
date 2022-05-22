@@ -6,6 +6,7 @@ import ua.edu.sumdu.j2se.tokarenko.tasks.model.Task;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.TaskActionsView;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class TaskActionsController extends BaseController {
     protected static final Logger logger = Logger.getLogger(TaskActionsController.class);
@@ -18,6 +19,7 @@ public class TaskActionsController extends BaseController {
     protected LocalDateTime end;
     protected Integer interval;
     protected String title;
+    protected UUID userId;
     protected Boolean isActive;
 
     /**
@@ -74,6 +76,13 @@ public class TaskActionsController extends BaseController {
      */
     public void editTimeRepeating() {
         bufferedTask.setTime(start, end, interval);
+    }
+
+    /**
+     * Метод редагування ідентифікатору користувача задачі.
+     */
+    public void setUserId() {
+        bufferedTask.setUserId(userId);
     }
 
     /**

@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Tasks;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
 
@@ -12,14 +13,15 @@ public class TodayTasksController extends PrintCalendarController {
      * Метод створення та виведення календаря задач на поточну дату.
      *
      * @param taskList колекція задач.
+     * @param user     поточний користувач.
      * @return наступний(обраний) режим програми.
      */
     @Override
-    public ProgramModes process(AbstractTaskList taskList) {
+    public ProgramModes process(AbstractTaskList taskList, User user) {
         setStartPeriod(LocalDateTime.now());
         setEndPeriod(LocalDateTime.now().plusHours(24 - LocalDateTime.now().getHour()));
 
-        calendarTasks = Tasks.calendar(taskList, start, end);
+        calendarTasks = Tasks.calendar(taskList, user, start, end);
 
         if (calendarTasks.isEmpty()) {
             ConsoleView.newEmptyLine();

@@ -1,12 +1,15 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import org.apache.log4j.Logger;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class ConsoleInputController extends BaseController {
@@ -75,6 +78,62 @@ public class ConsoleInputController extends BaseController {
     }
 
     /**
+     * Метод перевірки правильності введення імені користувача.
+     *
+     * @return введений користувачем рядок.
+     */
+    public static String nextUsername() {
+        do {
+            error = false;
+            strValue = in.nextLine();
+
+            if (DataTest.isEmptyString(strValue)) {
+                logger.debug("String input error");
+                error = true;
+            }
+
+            if (!strValue.matches("^[a-zA-Z][a-zA-Z0-9-_\\.]{6,20}$")) {
+                System.out.println("Ім'я користувача повинне починатися латинською літерою");
+                System.out.println("і мати довжину 6-20 символів. ");
+                error = true;
+            }
+
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
+            }
+        } while (error);
+        return strValue;
+    }
+
+    /**
+     * Метод перевірки правильності введення паролю користувача.
+     *
+     * @return введений користувачем рядок.
+     */
+    public static String nextPassword() {
+        do {
+            error = false;
+            strValue = in.nextLine();
+
+            if (DataTest.isEmptyString(strValue)) {
+                logger.debug("String input error");
+                error = true;
+            }
+
+            if (!strValue.matches("(?=^.{8,64}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")) {
+                System.out.println("Пароль повинен містити число або символ, велику і малу латинські літери");
+                System.out.println("та мати довжину 8-64 символів. ");
+                error = true;
+            }
+
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
+            }
+        } while (error);
+        return strValue;
+    }
+
+    /**
      * Метод перевірки числа на негативність або 0.
      *
      * @return введене користувачем число.
@@ -115,6 +174,44 @@ public class ConsoleInputController extends BaseController {
             if (intValue < from || intValue > to) {
                 logger.debug("Integer input error");
                 error = true;
+            }
+
+            if (error) {
+                System.out.print("Невірні дані. Спробуйте ще раз: ");
+            }
+        } while (error);
+        return intValue;
+    }
+
+    /**
+     * Метод перевірки номеру задачі користувача в повному списку задач.
+     *
+     * @param tasks - колекція задач.
+     * @param user  - колекція користувачів.
+     * @return введене користувачем число.
+     */
+    public static int nextIntInUserTasks(AbstractTaskList tasks, User user) {
+        do {
+            ArrayList<Integer> allowedValues = new ArrayList<>();
+
+            error = false;
+            strValue = in.nextLine();
+
+            checkInt();
+
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.getTask(i).getUserId().equals(user.getUserId())) {
+                    allowedValues.add(i);
+                }
+            }
+
+            for (Integer integer : allowedValues) {
+                if (integer.equals(intValue)) {
+                    error = false;
+                    break;
+                } else {
+                    error = true;
+                }
             }
 
             if (error) {
@@ -258,7 +355,7 @@ public class ConsoleInputController extends BaseController {
 
             if (error && attempts <= 0) {
                 ConsoleView.newEmptyLine();
-                ConsoleView.printWarning("ПІШОВ Н@ХYЙ, МОСКАЛЬ ПРОКЛЯТИЙ!!!");
+                ConsoleView.printWarning("ЙДИ ЗА РУСЬКИМ КОРАБЛЕМ, МОСКАЛЬ ПРОКЛЯТИЙ!!!");
                 return false;
             }
 

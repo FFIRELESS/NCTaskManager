@@ -5,11 +5,14 @@ import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Task implements Cloneable, Serializable {
     private static final Logger logger = Logger.getLogger(Task.class);
 
     private String title;
+
+    UUID userId;
 
     private int interval;
     private LocalDateTime start;
@@ -28,12 +31,14 @@ public class Task implements Cloneable, Serializable {
     /**
      * Конструктор неповторюваних задач.
      *
-     * @param title назва задачі.
-     * @param time  час виконання задачі.
+     * @param title  назва задачі.
+     * @param userId ідентифікатор користувача.
+     * @param time   час виконання задачі.
      * @throws IllegalArgumentException якщо час = null.
      */
-    public Task(String title, LocalDateTime time) {
+    public Task(String title, UUID userId, LocalDateTime time) {
         setTitle(title);
+        setUserId(userId);
         setTime(time);
         logger.debug("Created not repeating task: " + this);
     }
@@ -42,13 +47,15 @@ public class Task implements Cloneable, Serializable {
      * Конструктор повторюваних задач.
      *
      * @param title    назва задачі.
+     * @param userId   ідентифікатор користувача.
      * @param start    час початку задачі.
      * @param end      час закінчення задачі.
      * @param interval інтервал повторювання задачі.
      * @throws IllegalArgumentException якщо початковий час >= кінцевому, або при null-значенні дат.
      */
-    public Task(String title, LocalDateTime start, LocalDateTime end, int interval) {
+    public Task(String title, UUID userId, LocalDateTime start, LocalDateTime end, int interval) {
         setTitle(title);
+        setUserId(userId);
         setTime(start, end, interval);
         logger.debug("Created repeating task: " + this);
     }
@@ -68,9 +75,27 @@ public class Task implements Cloneable, Serializable {
      * @param title назва задачі.
      */
     public void setTitle(String title) {
-        logger.debug("Saved title of task: " + this);
-
         this.title = title;
+        logger.debug("Saved title of task: " + this);
+    }
+
+    /**
+     * Getter ідентифікатора користувача.
+     *
+     * @return ідентифікатор користувача.
+     */
+    public UUID getUserId() {
+        return userId;
+    }
+
+    /**
+     * Setter ідентифікатора користувача.
+     *
+     * @param userId ідентифікатор користувача.
+     */
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+        logger.debug("Saved new userId of task: " + this);
     }
 
     /**
@@ -173,9 +198,8 @@ public class Task implements Cloneable, Serializable {
      * @param active встановлює активність задачі.
      */
     public void setActive(boolean active) {
-        logger.debug("Saved new activity of task: " + this);
-
         this.isActive = active;
+        logger.debug("Saved new activity of task: " + this);
     }
 
     /**
@@ -279,6 +303,7 @@ public class Task implements Cloneable, Serializable {
     @Override
     public String toString() {
         return "Task {" +
+                "userId='" + userId + "'" +
                 "title='" + title + "'" +
                 ", isActive=" + isActive +
                 ", start=" + start +

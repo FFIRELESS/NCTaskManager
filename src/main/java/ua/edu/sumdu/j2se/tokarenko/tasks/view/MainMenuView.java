@@ -20,6 +20,19 @@ public class MainMenuView extends PrintTasksView {
     }
 
     /**
+     * Метод, що виводить меню входу в програму.
+     */
+    public void printAuthorizeMenu() {
+        ConsoleView.newEmptyLine();
+        ConsoleView.printTitle("ВХІД");
+        ConsoleView.printTitle("1. Увійти");
+        ConsoleView.printTitle("2. Зареєструватися");
+        ConsoleView.printTitle("3. Вийти");
+        ConsoleView.newEmptyLine();
+        ConsoleView.printChooser("Оберіть режим: ");
+    }
+
+    /**
      * Метод, що виводить головне меню.
      */
     public void printMainMenu() {

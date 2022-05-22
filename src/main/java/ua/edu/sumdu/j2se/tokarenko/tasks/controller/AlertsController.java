@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Task;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Tasks;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
@@ -22,12 +23,13 @@ public class AlertsController extends BaseController {
      * Метод визначення та контролю термінових задач.
      *
      * @param taskList колекція задач.
+     * @param user поточний користувач.
      * @return наступний(обраний) режим програми.
      */
     @Override
-    public ProgramModes process(AbstractTaskList taskList) {
+    public ProgramModes process(AbstractTaskList taskList, User user) {
         if (DataTest.isEmptyList(taskList)) {
-            SortedMap<LocalDateTime, Set<Task>> taskMap = Tasks.calendar(taskList,
+            SortedMap<LocalDateTime, Set<Task>> taskMap = Tasks.calendar(taskList, user,
                     LocalDateTime.now(), LocalDateTime.now().plusMinutes(30));
 
             if (!taskMap.isEmpty()) {

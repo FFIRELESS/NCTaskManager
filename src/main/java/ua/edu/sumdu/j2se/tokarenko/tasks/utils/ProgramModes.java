@@ -1,6 +1,9 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.utils;
 
 public enum ProgramModes {
+    AUTH_MENU,
+    REGISTER,
+    AUTHORIZE,
     MAIN_MENU,
     PRINT_ALL,
     PRINT_CALENDAR,

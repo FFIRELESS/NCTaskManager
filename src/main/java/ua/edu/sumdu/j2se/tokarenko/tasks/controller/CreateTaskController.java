@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
 
 import static ua.edu.sumdu.j2se.tokarenko.tasks.utils.Exceptions.unknownModeException;
@@ -11,13 +12,16 @@ public class CreateTaskController extends TaskActionsController {
      *
      * @param taskList колекція задач.
      * @param mode     режим програми.
+     * @param user     поточний користувач.
      * @return наступний(обраний) режим програми.
      * @throws NullPointerException якщо режим програми невірний.
      */
     @Override
-    public ProgramModes process(AbstractTaskList taskList, ProgramModes mode) {
+    public ProgramModes process(AbstractTaskList taskList, ProgramModes mode, User user) {
         if (getBufferedTask() == null) {
             createNewTask();
+            userId = user.getUserId();
+            setUserId();
         }
 
         switch (mode) {

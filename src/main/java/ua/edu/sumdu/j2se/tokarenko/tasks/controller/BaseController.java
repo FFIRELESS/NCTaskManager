@@ -1,6 +1,8 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.ArrayUserList;
+import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
 
 import java.util.Scanner;
@@ -20,13 +22,34 @@ public abstract class BaseController {
     }
 
     /**
+     * Метод, що контролює роботу вхідного меню програми.
+     *
+     * @return наступний(обраний) режим програми.
+     * @throws NullPointerException якщо режим програми невірний.
+     */
+    ProgramModes authMenuProcess() {
+        throw programModeException;
+    }
+
+    /**
+     * Метод, що контролює роботу програми на основі колекції задач.
+     *
+     * @param users колекція користувачів.
+     * @return наступний(обраний) режим програми.
+     * @throws NullPointerException якщо режим програми невірний.
+     */
+    ProgramModes process(ArrayUserList users) {
+        throw programModeException;
+    }
+
+    /**
      * Метод, що контролює роботу програми на основі колекції задач.
      *
      * @param tasks колекція задач.
      * @return наступний(обраний) режим програми.
      * @throws NullPointerException якщо режим програми невірний.
      */
-    ProgramModes process(AbstractTaskList tasks) {
+    ProgramModes process(AbstractTaskList tasks, User user) {
         throw programModeException;
     }
 
@@ -49,7 +72,7 @@ public abstract class BaseController {
      * @return наступний(обраний) режим програми.
      * @throws NullPointerException якщо режим програми невірний.
      */
-    ProgramModes process(AbstractTaskList tasks, ProgramModes mode) {
+    ProgramModes process(AbstractTaskList tasks, ProgramModes mode, User user) {
         throw programModeException;
     }
 
@@ -66,12 +89,34 @@ public abstract class BaseController {
     }
 
     /**
+     * Метод, що контролює роботу програми на основі колекції користувачів та контролеру дій користувачів.
+     *
+     * @param users      колекція користувачів.
+     * @param controller контролер дій користувачів.
+     * @return наступний(обраний) режим програми.
+     * @throws NullPointerException якщо режим програми невірний.
+     */
+    public ProgramModes process(ArrayUserList users, UserActionsController controller) {
+        throw programModeException;
+    }
+
+    /**
      * Метод, що контролює зчитування задач з файлу.
      *
      * @return колекцію задач.
      * @throws NullPointerException якщо режим програми невірний.
      */
-    AbstractTaskList readFileProcess() {
+    AbstractTaskList readTasksFileProcess() {
+        throw programModeException;
+    }
+
+    /**
+     * Метод, що контролює зчитування користувачів з файлу.
+     *
+     * @return колекцію користувачів.
+     * @throws NullPointerException якщо режим програми невірний.
+     */
+    ArrayUserList readUsersFileProcess() {
         throw programModeException;
     }
 
@@ -81,7 +126,17 @@ public abstract class BaseController {
      * @param taskList колекція задач.
      * @throws NullPointerException якщо режим програми невірний.
      */
-    void writeFileProcess(AbstractTaskList taskList) {
+    void writeTasksFileProcess(AbstractTaskList taskList) {
+        throw programModeException;
+    }
+
+    /**
+     * Метод, що контролює запис користувачів до файлу.
+     *
+     * @param userList колекція користувачів.
+     * @throws NullPointerException якщо режим програми невірний.
+     */
+    void writeUsersFileProcess(ArrayUserList userList) {
         throw programModeException;
     }
 }
