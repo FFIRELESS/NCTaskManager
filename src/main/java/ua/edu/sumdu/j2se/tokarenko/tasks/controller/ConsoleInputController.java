@@ -1,15 +1,12 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.controller;
 
 import org.apache.log4j.Logger;
-import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
-import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class ConsoleInputController extends BaseController {
