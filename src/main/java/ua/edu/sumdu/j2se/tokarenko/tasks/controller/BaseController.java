@@ -71,7 +71,7 @@ public abstract class BaseController {
      *
      * @param tasks колекція задач.
      * @param user  поточний користувач.
-     * @return колекція заадач користувача.
+     * @return колекція задач користувача.
      */
     ArrayTaskList process(AbstractTaskList tasks, User user) {
         throw programModeException;

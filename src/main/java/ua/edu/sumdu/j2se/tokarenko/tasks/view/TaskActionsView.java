@@ -23,7 +23,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskStartTime() {
         newEmptyLine();
-        printChooser("Введіть час початку в форматі (латинською) \"2022-01-01T13:32:00\": ");
+        printChooser("Введіть час початку в форматі (латинською) \"2022-12-31T08:32:00\": ");
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskEndTime() {
         newEmptyLine();
-        printChooser("Введіть час закінчення в форматі (латинською) \"2022-01-01T13:32:00\": ");
+        printChooser("Введіть час закінчення в форматі (латинською) \"2022-12-31T08:32:00\": ");
     }
 
     /**
@@ -55,7 +55,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setPeriodStartTime() {
         newEmptyLine();
-        printChooser("Введіть час початку в форматі (латинською) \"2022-01-01T13:32:00\": ");
+        printChooser("Введіть час початку в форматі (латинською) \"2022-12-31T08:32:00\": ");
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setPeriodEndTime() {
         newEmptyLine();
-        printChooser("Введіть час закінчення в форматі (латинською) \"2022-01-01T13:32:00\": ");
+        printChooser("Введіть час закінчення в форматі (латинською) \"2022-12-31T08:32:00\": ");
     }
 
     /**
@@ -81,6 +81,7 @@ public class TaskActionsView extends PrintTasksView {
     public void createTask() {
         newEmptyLine();
         printParagraph("Задачу створено");
+        newEmptyLine();
     }
 
     /**
@@ -89,5 +90,6 @@ public class TaskActionsView extends PrintTasksView {
     public void creatingErrorTask() {
         newEmptyLine();
         printWarning("Задачу не було створено");
+        newEmptyLine();
     }
 }

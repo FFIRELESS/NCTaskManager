@@ -13,7 +13,7 @@ import java.io.File;
 public class FileIOController extends BaseController {
     protected static final Logger logger = Logger.getLogger(FileIOController.class);
 
-    private final File tasksFile = new File("savedTasks.json");
+    private final File tasksFile = new File("tasks.json");
     private final File usersFile = new File("users.json");
 
     /**

@@ -304,7 +304,7 @@ public class Task implements Cloneable, Serializable {
     public String toString() {
         return "Task {" +
                 "userId='" + userId + "'" +
-                "title='" + title + "'" +
+                ", title='" + title + "'" +
                 ", isActive=" + isActive +
                 ", start=" + start +
                 ", end=" + end +

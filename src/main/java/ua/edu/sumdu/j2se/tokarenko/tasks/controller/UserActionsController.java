@@ -17,14 +17,15 @@ public class UserActionsController extends BaseController {
     protected String password;
 
     /**
-     * Метод створення користувача.
+     * Метод створення буферизованого користувача.
      */
     public void createNewUser() {
         bufferedUser = new User();
+        logger.debug("Created new buffered user");
     }
 
     /**
-     * Метод обирання даного користувача.
+     * Метод обирання буферизованого користувача.
      *
      * @param user користувач.
      * @throws CloneNotSupportedException при помилці клонування користувача.
@@ -35,47 +36,43 @@ public class UserActionsController extends BaseController {
     }
 
     /**
-     * Метод перевірки користувача на null.
-     */
-    public boolean isUserNull() {
-        return userId == null || username == null || password == null;
-    }
-
-    /**
-     * Метод редагування імені користувача.
+     * Метод редагування імені буферизованого користувача.
      */
     public void editUsername() {
         bufferedUser.setUsername(username);
+        logger.debug("Set buffered user username: '" + username + "'");
     }
 
     /**
-     * Метод редагування ідентифікатора користувача.
+     * Метод редагування ідентифікатора буферизованого користувача.
      */
     public void editId() {
         bufferedUser.setUserId(UUID.randomUUID());
+        logger.debug("Set buffered user userId: '" + userId + "'");
     }
 
     /**
-     * Метод редагування паролю користувача.
+     * Метод редагування паролю буферизованого користувача.
      */
     public void editPassword() {
         bufferedUser.setPassword(password);
+        logger.debug("Set buffered user password: '" + password + "'");
     }
 
     /**
      * Метод отримання буферизованого користувача.
      *
-     * @return буферизовану задачу.
+     * @return буферизований користувач.
      */
     static public User getBufferedUser() {
         return bufferedUser;
     }
 
     /**
-     * Метод очищення буферу користувача.
+     * Метод очищення буферизованого користувача.
      */
     public void clearBuffer() {
         bufferedUser = null;
-        logger.debug("User buffer cleared");
+        logger.debug("Buffered user cleared");
     }
 }

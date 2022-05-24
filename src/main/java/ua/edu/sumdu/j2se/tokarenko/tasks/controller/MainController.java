@@ -25,7 +25,7 @@ public class MainController extends BaseController {
     private final BaseController printTasksController = new PrintTasksController();
     private final BaseController savingController = new SavingController();
     private final BaseController fileIOController = new FileIOController();
-    private final AlertsController alertsController = new AlertsController();
+    private final BaseController alertsController = new AlertsController();
 
     ProgramModes mode = ProgramModes.AUTH_MENU;
 
@@ -53,11 +53,9 @@ public class MainController extends BaseController {
                 case AUTHORIZE:
                     mode = authController.process(storedUsers);
                     break;
-
                 case REGISTER:
                     mode = registerController.process(storedUsers);
                     break;
-
                 case EXIT:
                     break;
             }

@@ -23,14 +23,15 @@ public class TaskActionsController extends BaseController {
     protected Boolean isActive;
 
     /**
-     * Метод створення задачі.
+     * Метод створення буферизованої задачі.
      */
     public void createNewTask() {
         bufferedTask = new Task();
+        logger.debug("Created new buffered task");
     }
 
     /**
-     * Метод обирання даної задачі.
+     * Метод обирання буферизованої задачі.
      *
      * @param taskList колекція задач.
      * @param idx      індекс задачі для обирання.
@@ -39,50 +40,61 @@ public class TaskActionsController extends BaseController {
     public void selectedTask(AbstractTaskList taskList, int idx) throws CloneNotSupportedException {
         bufferedTask = taskList.getTask(idx).clone();
         taskList.remove(taskList.getTask(idx));
-
-        logger.debug("Task selected: " + bufferedTask.toString());
+        logger.debug("Buffered task selected: " + bufferedTask.toString());
     }
 
     /**
-     * Метод перевірки задачі на null.
+     * Метод перевірки буферизованої задачі на null.
      */
     public boolean isTaskNull() {
-        return start == null || title == null;
+        logger.debug("Checked buffered task for null: " + bufferedTask);
+        if (bufferedTask.getStartTime() == null || bufferedTask.getTitle() == null) {
+            logger.debug("Buffered task is null");
+            return true;
+        } else {
+            logger.debug("Buffered task is not null");
+            return false;
+        }
     }
 
     /**
-     * Метод редагування назви задачі.
+     * Метод редагування назви буферизованої задачі.
      */
     public void editTitle() {
         bufferedTask.setTitle(title);
+        logger.debug("Set buffered task title: '" + title + "'");
     }
 
     /**
-     * Метод редагування активності задачі.
+     * Метод редагування активності буферизованої задачі.
      */
     public void editIsActive() {
         bufferedTask.setActive(isActive);
+        logger.debug("Set buffered task activity: " + isActive);
     }
 
     /**
-     * Метод редагування дати неповторюваної задачі.
+     * Метод редагування дати неповторюваної буферизованої задачі.
      */
     public void editTimeNotRepeating() {
         bufferedTask.setTime(start);
+        logger.debug("Set buffered task start time: " + start);
     }
 
     /**
-     * Метод редагування дати повторюваної задачі.
+     * Метод редагування дати повторюваної буферизованої задачі.
      */
     public void editTimeRepeating() {
         bufferedTask.setTime(start, end, interval);
+        logger.debug("Set buffered task time: " + start + " | " + end + " | " + interval);
     }
 
     /**
-     * Метод редагування ідентифікатору користувача задачі.
+     * Метод редагування ідентифікатору користувача буферизованої задачі.
      */
     public void setUserId() {
         bufferedTask.setUserId(userId);
+        logger.debug("Set buffered task userId: '" + userId + "'");
     }
 
     /**
@@ -95,10 +107,10 @@ public class TaskActionsController extends BaseController {
     }
 
     /**
-     * Метод очищення буферу задач.
+     * Метод очищення буферизованої задачі.
      */
     public void clearBuffer() {
         bufferedTask = null;
-        logger.debug("Task buffer cleared");
+        logger.debug("Buffered task cleared");
     }
 }
