@@ -29,7 +29,7 @@ public class AlertsController extends BaseController {
     public ProgramModes process(AbstractTaskList taskList) {
         if (DataTest.isEmptyList(taskList)) {
             SortedMap<LocalDateTime, Set<Task>> taskMap = Tasks.calendar(taskList,
-                    LocalDateTime.now(), LocalDateTime.now().plusMinutes(30));
+                    LocalDateTime.now(), LocalDateTime.now().plusMinutes(5));
 
             if (!taskMap.isEmpty()) {
                 ConsoleView.newEmptyLine();

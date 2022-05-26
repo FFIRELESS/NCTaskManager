@@ -90,8 +90,10 @@ public class ConsoleInputController extends BaseController {
             }
 
             if (!strValue.matches("^[a-zA-Z][a-zA-Z0-9-_\\.]{6,20}$")) {
+                ConsoleView.newEmptyLine();
                 System.out.println("Ім'я користувача повинне починатися латинською літерою");
                 System.out.println("і мати довжину 6-20 символів. ");
+                ConsoleView.newEmptyLine();
                 error = true;
             }
 
@@ -118,8 +120,10 @@ public class ConsoleInputController extends BaseController {
             }
 
             if (!strValue.matches("(?=^.{8,64}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$")) {
+                ConsoleView.newEmptyLine();
                 System.out.println("Пароль повинен містити число або символ, велику і малу латинські літери");
                 System.out.println("та мати довжину 8-64 символів. ");
+                ConsoleView.newEmptyLine();
                 error = true;
             }
 

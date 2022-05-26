@@ -7,8 +7,8 @@ import ua.edu.sumdu.j2se.tokarenko.tasks.controller.MainController;
  * задач користувачів протягом життєвого таймлайну.
  *
  * @author F.FIRELESS
- * @version 1.2.2 beta
- * @since 2022-05-24
+ * @version 1.2.3 beta
+ * @since 2022-05-26
  */
 
 public class Main {

@@ -30,7 +30,7 @@ public class FileIOController extends BaseController {
         try {
             TaskIO.readText(tasks, tasksFile);
         } catch (Exception e) {
-            System.out.println("Помилка читання з файлу задач");
+            logger.warn("Error reading tasks from file");
         }
         return tasks;
     }
@@ -49,7 +49,7 @@ public class FileIOController extends BaseController {
         try {
             UserIO.readText(users, usersFile);
         } catch (Exception e) {
-            System.out.println("Помилка читання з файлу користувачів");
+            logger.warn("Error reading users from file");
         }
         return users;
     }
@@ -66,7 +66,7 @@ public class FileIOController extends BaseController {
         try {
             TaskIO.writeText(taskList, tasksFile);
         } catch (Exception e) {
-            System.out.println("Помилка запису до файлу задач");
+            logger.error("Error writing tasks to file");
         }
     }
 
@@ -82,7 +82,7 @@ public class FileIOController extends BaseController {
         try {
             UserIO.writeText(userList, usersFile);
         } catch (Exception e) {
-            System.out.println("Помилка запису до файлу користувачів");
+            logger.error("Error writing users to file");
         }
     }
 }
