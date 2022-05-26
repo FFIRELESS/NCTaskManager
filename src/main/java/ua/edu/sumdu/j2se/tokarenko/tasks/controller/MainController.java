@@ -42,10 +42,9 @@ public class MainController extends BaseController {
             System.exit(1);
         }
 
-        AbstractTaskList storedTasks = fileIOController.readTasksFileProcess();
         ArrayUserList storedUsers = fileIOController.readUsersFileProcess();
 
-        while (!mode.equals(ProgramModes.MAIN_MENU) && !mode.equals(ProgramModes.EXIT)) {
+        while (!mode.equals(ProgramModes.MAIN_MENU)) {
             if (mode.equals(ProgramModes.AUTH_MENU)) {
                 mode = authMenuController.authMenuProcess();
             }
@@ -57,14 +56,20 @@ public class MainController extends BaseController {
                     mode = registerController.process(storedUsers);
                     break;
                 case EXIT:
+                    MainMenuView.printBye();
+                    fileIOController.writeUsersFileProcess(storedUsers);
+
+                    System.exit(0);
+                    logger.debug("Program finished at: " + new Date());
                     break;
             }
         }
 
         User currentUser = UserActionsController.getBufferedUser();
+        AbstractTaskList storedTasks = fileIOController.readTasksFileProcess();
         ArrayTaskList userTasks = getUserTasksController.process(storedTasks, currentUser);
 
-        while (!mode.equals(ProgramModes.EXIT)) {
+        while (true) {
             if (mode.equals(ProgramModes.MAIN_MENU)) {
                 alertsController.process(userTasks);
                 todayTasksController.process(userTasks);
@@ -90,13 +95,16 @@ public class MainController extends BaseController {
                 case PRINT_ALL:
                     mode = printTasksController.process(userTasks);
                     break;
+                case EXIT:
+                    MainMenuView.printBye();
+                    savingController.process(storedTasks, userTasks);
+                    fileIOController.writeTasksFileProcess(storedTasks);
+                    fileIOController.writeUsersFileProcess(storedUsers);
+
+                    System.exit(0);
+                    logger.debug("Program finished at: " + new Date());
+                    break;
             }
         }
-        MainMenuView.printBye();
-        savingController.process(storedTasks, userTasks);
-        fileIOController.writeTasksFileProcess(storedTasks);
-        fileIOController.writeUsersFileProcess(storedUsers);
-
-        logger.debug("Program finished at: " + new Date());
     }
 }
