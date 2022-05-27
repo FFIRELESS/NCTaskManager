@@ -24,7 +24,7 @@ public class UserIO {
                 listStream.writeObject(currentUser);
             }
         } catch (IOException e) {
-            logger.fatal("User list writing error", e);
+            logger.fatal("User list writing error");
             e.printStackTrace();
         }
     }
@@ -45,10 +45,10 @@ public class UserIO {
                 users.add((User) listStream.readObject());
             }
         } catch (ClassNotFoundException e) {
-            logger.fatal("Error casting read object to the User class", e);
+            logger.fatal("Error casting read object to the User class");
             e.printStackTrace();
         } catch (IOException e) {
-            logger.fatal("Reading error", e);
+            logger.fatal("Reading error");
             e.printStackTrace();
         }
     }
@@ -70,10 +70,10 @@ public class UserIO {
                 listStream.writeObject(currentUser);
             }
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Writing error", e);
+            logger.fatal("Writing error");
             e.printStackTrace();
         }
     }
@@ -95,13 +95,13 @@ public class UserIO {
                 users.add((User) listStream.readObject());
             }
         } catch (ClassNotFoundException e) {
-            logger.fatal("Error casting read object to class User", e);
+            logger.fatal("Error casting read object to class User");
             e.printStackTrace();
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Error reading users from list", e);
+            logger.fatal("Error reading users from list");
             e.printStackTrace();
         }
     }
@@ -126,7 +126,7 @@ public class UserIO {
             }
             listStream.flush();
         } catch (IOException e) {
-            logger.fatal("Error writing user list", e);
+            logger.fatal("Error writing user list");
             e.printStackTrace();
         }
     }
@@ -150,7 +150,7 @@ public class UserIO {
                 users.add(json.fromJson(lineValue, User.class));
             }
         } catch (IOException e) {
-            logger.fatal("Reading error", e);
+            logger.fatal("Reading error");
             e.printStackTrace();
         }
     }
@@ -168,10 +168,10 @@ public class UserIO {
 
             write(users, writeStream);
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Creating stream error", e);
+            logger.fatal("Creating stream error");
             e.printStackTrace();
         }
     }
@@ -188,10 +188,10 @@ public class UserIO {
             logger.debug("Reading user list as text from the file");
             read(users, readStream);
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Creating stream error", e);
+            logger.fatal("Creating stream error");
             e.printStackTrace();
         }
     }

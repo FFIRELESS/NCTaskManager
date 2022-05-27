@@ -304,7 +304,7 @@ public class ConsoleInputController extends BaseController {
             error = false;
 
             ConsoleView.newEmptyLine();
-            ConsoleView.printParagraph("Відповідь: ");
+            ConsoleView.printParagraph("Відповідь:");
             strValue = in.nextLine();
 
             if (!strValue.toLowerCase(Locale.ROOT).contains("героям слава")) {

@@ -27,7 +27,7 @@ public class TodayTasksController extends PrintCalendarController {
             logger.debug("Today tasks list is empty");
         } else {
             ConsoleView.newEmptyLine();
-            ConsoleView.printParagraph("Задачі на сьогодні: ");
+            ConsoleView.printParagraph("Задачі на сьогодні:");
             printCalendarView.printCalendarTasks(calendarTasks);
         }
         return ProgramModes.MAIN_MENU;

@@ -29,7 +29,7 @@ public class MainMenuView extends PrintTasksView {
         ConsoleView.printTitle("2. Зареєструватися");
         ConsoleView.printTitle("3. Вийти");
         ConsoleView.newEmptyLine();
-        ConsoleView.printChooser("Оберіть режим: ");
+        ConsoleView.printChooser("Оберіть режим:");
     }
 
     /**
@@ -44,7 +44,7 @@ public class MainMenuView extends PrintTasksView {
         printTitle("4. Переглянути всі задачі");
         printTitle("5. Зберегти та вийти");
         newEmptyLine();
-        printChooser("Оберіть режим: ");
+        printChooser("Оберіть режим:");
         // cls();
     }
 
@@ -61,7 +61,7 @@ public class MainMenuView extends PrintTasksView {
         printTitle("5. Зберегти та повернутися");
         printTitle("6. Повернутися");
         newEmptyLine();
-        printChooser("Оберіть режим: ");
+        printChooser("Оберіть режим:");
         // cls();
     }
 
@@ -78,7 +78,7 @@ public class MainMenuView extends PrintTasksView {
         printTitle("4. Встановити час для неповторюваної задачі");
         printTitle("5. Зберегти та повернутися");
         newEmptyLine();
-        printChooser("Оберіть режим: ");
+        printChooser("Оберіть режим:");
         // cls();
     }
 }

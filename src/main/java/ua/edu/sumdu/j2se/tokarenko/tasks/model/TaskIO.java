@@ -24,7 +24,7 @@ public class TaskIO {
                 listStream.writeObject(currentTask);
             }
         } catch (IOException e) {
-            logger.fatal("Task list writing error", e);
+            logger.fatal("Task list writing error");
             e.printStackTrace();
         }
     }
@@ -45,10 +45,10 @@ public class TaskIO {
                 tasks.add((Task) listStream.readObject());
             }
         } catch (ClassNotFoundException e) {
-            logger.fatal("Error casting read object to the Task class", e);
+            logger.fatal("Error casting read object to the Task class");
             e.printStackTrace();
         } catch (IOException e) {
-            logger.fatal("Reading error", e);
+            logger.fatal("Reading error");
             e.printStackTrace();
         }
     }
@@ -70,10 +70,10 @@ public class TaskIO {
                 listStream.writeObject(currentTask);
             }
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Writing error", e);
+            logger.fatal("Writing error");
             e.printStackTrace();
         }
     }
@@ -95,13 +95,13 @@ public class TaskIO {
                 tasks.add((Task) listStream.readObject());
             }
         } catch (ClassNotFoundException e) {
-            logger.fatal("Error casting read object to class Task", e);
+            logger.fatal("Error casting read object to class Task");
             e.printStackTrace();
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Error reading task from list", e);
+            logger.fatal("Error reading task from list");
             e.printStackTrace();
         }
     }
@@ -126,7 +126,7 @@ public class TaskIO {
             }
             listStream.flush();
         } catch (IOException e) {
-            logger.fatal("Error writing task list", e);
+            logger.fatal("Error writing task list");
             e.printStackTrace();
         }
     }
@@ -150,7 +150,7 @@ public class TaskIO {
                 tasks.add(json.fromJson(lineValue, Task.class));
             }
         } catch (IOException e) {
-            logger.fatal("Reading error", e);
+            logger.fatal("Reading error");
             e.printStackTrace();
         }
     }
@@ -168,10 +168,10 @@ public class TaskIO {
 
             write(tasks, writeStream);
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Creating stream error", e);
+            logger.fatal("Creating stream error");
             e.printStackTrace();
         }
     }
@@ -188,10 +188,10 @@ public class TaskIO {
             logger.debug("Reading task list as text from the file");
             read(tasks, readStream);
         } catch (FileNotFoundException e) {
-            logger.error("File " + file + " not found", e);
+            logger.error("File " + file + " not found");
             throw e;
         } catch (IOException e) {
-            logger.fatal("Creating stream error", e);
+            logger.fatal("Creating stream error");
             e.printStackTrace();
         }
     }

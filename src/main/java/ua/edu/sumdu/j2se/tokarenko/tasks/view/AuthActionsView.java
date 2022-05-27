@@ -1,12 +1,12 @@
 package ua.edu.sumdu.j2se.tokarenko.tasks.view;
 
-public class AuthActionsView extends PrintTasksView {
+public class AuthActionsView extends ConsoleView {
     /**
      * Метод виведення поля редагування імені користувача.
      */
     public void setUsername() {
         newEmptyLine();
-        printChooser("Введіть логін: ");
+        printChooser("Введіть логін:");
     }
 
     /**
@@ -14,7 +14,7 @@ public class AuthActionsView extends PrintTasksView {
      */
     public void setPassword() {
         newEmptyLine();
-        printChooser("Введіть пароль: ");
+        printChooser("Введіть пароль:");
     }
 
     /**
@@ -22,7 +22,7 @@ public class AuthActionsView extends PrintTasksView {
      */
     public void repeatPassword() {
         newEmptyLine();
-        printChooser("Повторіть пароль: ");
+        printChooser("Повторіть пароль:");
     }
 
     /**
@@ -31,6 +31,7 @@ public class AuthActionsView extends PrintTasksView {
     public void errorRepeatPassword() {
         newEmptyLine();
         printWarning("Паролі не співпадають.");
+        newEmptyLine();
     }
 
     /**
@@ -39,6 +40,7 @@ public class AuthActionsView extends PrintTasksView {
     public void authSuccess() {
         newEmptyLine();
         printParagraph("Авторизовано");
+        newEmptyLine();
     }
 
     /**
@@ -47,6 +49,7 @@ public class AuthActionsView extends PrintTasksView {
     public void authError() {
         newEmptyLine();
         printWarning("Невірний логін або пароль");
+        newEmptyLine();
     }
 
     /**
@@ -56,6 +59,7 @@ public class AuthActionsView extends PrintTasksView {
         newEmptyLine();
         printParagraph("Користувача створено.");
         printParagraph("Увійдіть у систему");
+        newEmptyLine();
     }
 
     /**
@@ -64,5 +68,6 @@ public class AuthActionsView extends PrintTasksView {
     public void registerError() {
         newEmptyLine();
         printWarning("Користувач з таким іменем вже існує");
+        newEmptyLine();
     }
 }
