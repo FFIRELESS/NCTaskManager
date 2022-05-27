@@ -7,7 +7,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskTitle() {
         newEmptyLine();
-        printChooser("Введіть назву: ");
+        printChooser("Введіть назву:");
     }
 
     /**
@@ -15,7 +15,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskIsActive() {
         newEmptyLine();
-        printChooser("Активувати задачу? \"true\"(\"1\") - так, \"false\"(\"0\") - ні: ");
+        printChooser("Активувати задачу? \"true\"(\"1\") - так, \"false\"(\"0\") - ні:");
     }
 
     /**
@@ -23,7 +23,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskStartTime() {
         newEmptyLine();
-        printChooser("Введіть час початку в форматі (латинською) \"2022-12-31T08:32:00\": ");
+        printChooser("Введіть час початку в форматі (латинською) \"2022-12-31T08:32:00\":");
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskEndTime() {
         newEmptyLine();
-        printChooser("Введіть час закінчення в форматі (латинською) \"2022-12-31T08:32:00\": ");
+        printChooser("Введіть час закінчення в форматі (латинською) \"2022-12-31T08:32:00\":");
     }
 
     /**
@@ -39,7 +39,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskNewInterval() {
         newEmptyLine();
-        printChooser("Введіть інтервал повторення в секундах: ");
+        printChooser("Введіть інтервал повторення в секундах:");
     }
 
     /**
@@ -47,7 +47,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setTaskNumber() {
         newEmptyLine();
-        printChooser("Введіть номер задачі: ");
+        printChooser("Введіть номер задачі:");
     }
 
     /**
@@ -55,7 +55,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setPeriodStartTime() {
         newEmptyLine();
-        printChooser("Введіть час початку в форматі (латинською) \"2022-12-31T08:32:00\": ");
+        printChooser("Введіть час початку в форматі (латинською) \"2022-12-31T08:32:00\":");
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskActionsView extends PrintTasksView {
      */
     public void setPeriodEndTime() {
         newEmptyLine();
-        printChooser("Введіть час закінчення в форматі (латинською) \"2022-12-31T08:32:00\": ");
+        printChooser("Введіть час закінчення в форматі (латинською) \"2022-12-31T08:32:00\":");
     }
 
     /**

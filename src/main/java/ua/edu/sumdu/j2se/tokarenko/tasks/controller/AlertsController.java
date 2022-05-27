@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.AbstractTaskList;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Task;
 import ua.edu.sumdu.j2se.tokarenko.tasks.model.Tasks;
-import ua.edu.sumdu.j2se.tokarenko.tasks.model.User;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.DataTest;
 import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ProgramModes;
 import ua.edu.sumdu.j2se.tokarenko.tasks.view.ConsoleView;

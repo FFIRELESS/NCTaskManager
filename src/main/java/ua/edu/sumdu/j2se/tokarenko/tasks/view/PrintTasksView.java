@@ -51,7 +51,7 @@ public class PrintTasksView extends ConsoleView {
      */
     public void printAllTasks(AbstractTaskList taskList) {
         newEmptyLine();
-        printTitle("Повний список задач: ");
+        printTitle("Повний список задач:");
         printTableFullHeader();
 
         for (Task task : taskList) {
@@ -67,7 +67,7 @@ public class PrintTasksView extends ConsoleView {
      */
     public void printAllTasksWithIndex(AbstractTaskList taskList) {
         newEmptyLine();
-        printTitle("Ваші задачі: ");
+        printTitle("Ваші задачі:");
         printTableIndexHeader();
 
         for (int i = 0; i < taskList.size(); i++) {
