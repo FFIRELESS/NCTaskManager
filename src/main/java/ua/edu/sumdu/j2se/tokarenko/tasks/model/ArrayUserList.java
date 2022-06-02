@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.tokarenko.tasks.model;
 
 import com.google.common.hash.Hashing;
 import org.apache.log4j.Logger;
+import ua.edu.sumdu.j2se.tokarenko.tasks.utils.ListTypes;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
@@ -245,5 +246,23 @@ public class ArrayUserList implements Iterable<User> {
             finalObject.add(users[cnt]);
         }
         return finalObject;
+    }
+
+    public String toString() {
+        Iterator<User> strIterator = this.iterator();
+        StringBuilder finalString = new StringBuilder();
+        int number = 0;
+
+        finalString.append("ArrayUserList.class | ");
+        finalString.append(usersAmount);
+
+        while (strIterator.hasNext()) {
+            finalString.append(" | Object");
+            finalString.append(number);
+            finalString.append(" | ");
+            finalString.append(strIterator.next().toString());
+            number++;
+        }
+        return new String(finalString);
     }
 }

@@ -26,6 +26,7 @@ public class MainController extends BaseController {
     private final BaseController savingController = new SavingController();
     private final BaseController fileIOController = new FileIOController();
     private final BaseController alertsController = new AlertsController();
+    private final DatabaseController databaseController = new DatabaseController();
 
     ProgramModes mode = ProgramModes.AUTH_MENU;
 
@@ -38,11 +39,15 @@ public class MainController extends BaseController {
 
         MainMenuView.printHello();
 
-        if (!ConsoleInputController.nextUkrainian()) {
-            System.exit(1);
-        }
+//        if (!ConsoleInputController.nextUkrainian()) {
+//            System.exit(1);
+//        }
 
-        ArrayUserList storedUsers = fileIOController.readUsersFileProcess();
+//        ArrayUserList storedUsers = fileIOController.readUsersFileProcess();
+        databaseController.connect();
+        ArrayUserList storedUsers = databaseController.readUsers();
+
+        System.out.println(storedUsers);
 
         while (!mode.equals(ProgramModes.MAIN_MENU)) {
             if (mode.equals(ProgramModes.AUTH_MENU)) {
@@ -58,6 +63,7 @@ public class MainController extends BaseController {
                 case EXIT:
                     MainMenuView.printBye();
                     fileIOController.writeUsersFileProcess(storedUsers);
+                    databaseController.disconnect();
 
                     System.exit(0);
                     logger.debug("Program finished at: " + new Date());
@@ -66,7 +72,8 @@ public class MainController extends BaseController {
         }
 
         User currentUser = UserActionsController.getBufferedUser();
-        AbstractTaskList storedTasks = fileIOController.readTasksFileProcess();
+//        AbstractTaskList storedTasks = fileIOController.readTasksFileProcess();
+        AbstractTaskList storedTasks = databaseController.readTasks();
         ArrayTaskList userTasks = getUserTasksController.process(storedTasks, currentUser);
 
         while (true) {
@@ -100,6 +107,7 @@ public class MainController extends BaseController {
                     savingController.process(storedTasks, userTasks);
                     fileIOController.writeTasksFileProcess(storedTasks);
                     fileIOController.writeUsersFileProcess(storedUsers);
+                    databaseController.disconnect();
 
                     System.exit(0);
                     logger.debug("Program finished at: " + new Date());
